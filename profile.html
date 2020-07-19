@@ -13,16 +13,19 @@
     <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css?h=2c0fc24b3d3038317dc51c05339856d0">
     <link rel="stylesheet" href="assets/css/styles.min.css?h=aae875cedbb1a508073f7e192800fafb">
     <!--  DCM Scripts - Inside <head> -->
+    <script src="assets/js/config.js"></script>
     <script src="assets/js/profile.js"></script>
     <script>
-      //check if token exists:
-      var token = sessionStorage.getItem("sToken");  // getCookieByName(Config.getCookieTokenName());
-      if (!token) {
-          window.location.replace("login.html");
+      var sToken = sessionStorage.getItem("sToken");
+  //    alert("sToken: " + sToken);
+      var token  = getCookieByName(Config.getCookieTokenName());
+  //    alert("token: " + token);
+      // check if token exists:
+      if (!sToken) {
+        window.location.assign("login.html");
       };
-      loadUserInformation();
     </script>
-  </head>
+    </head>
   <body id="page-top">
     <div id="wrapper">
       <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="width: 167px;">

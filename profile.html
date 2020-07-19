@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Profile</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css?h=be3ee106ada8c36692e11907c6fa01ba">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css?h=2c0fc24b3d3038317dc51c05339856d0">
+    <link rel="stylesheet" href="assets/css/styles.min.css?h=aae875cedbb1a508073f7e192800fafb">
+    <!--  DCM Scripts - Inside <head> -->
+    <script src="assets/js/profile.js"></script>
+    <script>
+      //check if token exists:
+      var token = sessionStorage.getItem("sToken");  // getCookieByName(Config.getCookieTokenName());
+      if (!token) {
+          window.location.replace("login.html");
+      };
+      loadUserInformation();
+    </script>
+  </head>
+  <body id="page-top">
+    <div id="wrapper">
+      <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="width: 167px;">
+        <div class="container-fluid d-flex flex-column p-0">
+            <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                <div class="sidebar-brand-icon rotate-n-15"><i class="material-icons">business</i></div>
+                <div class="sidebar-brand-text mx-3"><span>eccentex</span></div>
+            </a>
+            <hr class="sidebar-divider my-0">
+            <ul class="nav navbar-nav text-white-50" id="accordionSidebar">
+                <!-- Start: Home -->
+                <li class="nav-item" role="presentation"><a class="nav-link" href="index.html"><i class="fas fa-tachometer-alt"></i><span>Home</span></a></li>
+                <!-- End: Home -->
+                <!-- Start: Profile -->
+                <li class="nav-item" role="presentation"><a class="nav-link active" href="profile.html"><i class="fas fa-user"></i><span>Profile</span></a></li>
+                <!-- End: Profile -->
+                <!-- Start: Table -->
+                <li class="nav-item" role="presentation"><a class="nav-link" href="activityLog.html"><i class="la la-table"></i><span>My Activity Log</span></a></li>
+                <!-- End: Table -->
+                <!-- Start: My cases -->
+                <li class="nav-item" role="presentation"><a class="nav-link" href="openCases.html"><i class="fas fa-table"></i><span>My Open Cases</span></a></li>
+                <!-- End: My cases -->
+                <!-- Start: New Case -->
+                <li class="nav-item" role="presentation"><a class="nav-link" href="newRequest.html"><i class="material-icons">fiber_new</i><span>Submit Request</span></a></li>
+                <!-- End: New Case -->
+                <!-- Start: Help Center -->
+                <li class="nav-item" role="presentation"><a class="nav-link" href="helpCenter.html"><i class="fas fa-window-maximize"></i><span>Help Center</span></a></li>
+                <!-- End: Help Center -->
+            </ul>
+            <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+        </div>
+      </nav>
+      <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+          <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+            <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
+              <form class="form-inline d-none d-sm-inline-block mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ...">
+                  <div class="input-group-append"><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
+                </div>
+              </form>
+                <ul class="nav navbar-nav flex-nowrap ml-auto">
+                  <li class="nav-item dropdown show d-sm-none no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="true" href="#"><i class="fas fa-search"></i></a>
+                    <div class="dropdown-menu show dropdown-menu-right p-3 animated--grow-in" role="menu" aria-labelledby="searchDropdown">
+                      <form class="form-inline mr-auto navbar-search w-100">
+                        <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ...">
+                            <div class="input-group-append"><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
+                        </div>
+                      </form>
+                    </div>
+                  </li>
+                    <li class="nav-item dropdown no-arrow mx-1" role="presentation">
+                        <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><span class="badge badge-danger badge-counter" style="font-size: 16px;">3+</span><i class="fas fa-bell fa-fw" style="font-size: 22px;"></i></a>
+                            <div
+                                class="dropdown-menu dropdown-menu-right dropdown-list dropdown-menu-right animated--grow-in" role="menu">
+                                <h6 class="dropdown-header">alerts center</h6>
+                                <a class="d-flex align-items-center dropdown-item" href="#">
+                                    <div class="mr-3">
+                                        <div class="bg-primary icon-circle"><i class="fas fa-file-alt text-white"></i></div>
+                                    </div>
+                                    <div><span class="small text-gray-500">December 12, 2019</span>
+                                        <p>A new monthly report is ready to download!</p>
+                                    </div>
+                                </a>
+                                <a class="d-flex align-items-center dropdown-item" href="#">
+                                    <div class="mr-3">
+                                        <div class="bg-success icon-circle"><i class="fas fa-donate text-white"></i></div>
+                                    </div>
+                                    <div><span class="small text-gray-500">December 7, 2019</span>
+                                        <p>$290.29 has been deposited into your account!</p>
+                                    </div>
+                                </a>
+                                <a class="d-flex align-items-center dropdown-item" href="#">
+                                    <div class="mr-3">
+                                        <div class="bg-warning icon-circle"><i class="fas fa-exclamation-triangle text-white"></i></div>
+                                    </div>
+                                    <div><span class="small text-gray-500">December 2, 2019</span>
+                                        <p>Spending Alert: We've noticed unusually high spending for your account.</p>
+                                    </div>
+                                </a><a class="text-center dropdown-item small text-gray-500" href="#">Show All Alerts</a></div>
+            </div>
+            </li>
+            <li class="nav-item dropdown no-arrow mx-1" role="presentation">
+                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><i class="fas fa-envelope fa-fw" style="font-size: 22px;"></i><span class="badge badge-danger badge-counter" style="font-size: 16px;">7</span></a>
+                    <div
+                        class="dropdown-menu dropdown-menu-right dropdown-list dropdown-menu-right animated--grow-in" role="menu">
+                        <h6 class="dropdown-header">alerts center</h6>
+                        <a class="d-flex align-items-center dropdown-item" href="#">
+                            <div class="dropdown-list-image mr-3"><img class="rounded-circle" src="assets/img/avatars/avatar4.jpeg?h=fefb30b61c8459a66bd338b7d790c3d5">
+                                <div class="bg-success status-indicator"></div>
+                            </div>
+                            <div class="font-weight-bold">
+                                <div class="text-truncate"><span>Hi there! I am wondering if you can help me with a problem I've been having.</span></div>
+                                <p class="small text-gray-500 mb-0">Emily Fowler - 58m</p>
+                            </div>
+                        </a>
+                        <a class="d-flex align-items-center dropdown-item" href="#">
+                            <div class="dropdown-list-image mr-3"><img class="rounded-circle" src="assets/img/avatars/avatar2.jpeg?h=5d142be9441885f0935b84cf739d4112">
+                                <div class="status-indicator"></div>
+                            </div>
+                            <div class="font-weight-bold">
+                                <div class="text-truncate"><span>I have the photos that you ordered last month!</span></div>
+                                <p class="small text-gray-500 mb-0">Jae Chun - 1d</p>
+                            </div>
+                        </a>
+                        <a class="d-flex align-items-center dropdown-item" href="#">
+                            <div class="dropdown-list-image mr-3"><img class="rounded-circle" src="assets/img/avatars/avatar3.jpeg?h=c5166867f10a4e454b5b2ae8d63268b3">
+                                <div class="bg-warning status-indicator"></div>
+                            </div>
+                            <div class="font-weight-bold">
+                                <div class="text-truncate"><span>Last month's report looks great, I am very happy with the progress so far, keep up the good work!</span></div>
+                                <p class="small text-gray-500 mb-0">Morgan Alvarez - 2d</p>
+                            </div>
+                        </a>
+                        <a class="d-flex align-items-center dropdown-item" href="#">
+                            <div class="dropdown-list-image mr-3"><img class="rounded-circle" src="assets/img/avatars/avatar5.jpeg?h=35dc45edbcda6b3fc752dab2b0f082ea">
+                                <div class="bg-success status-indicator"></div>
+                            </div>
+                            <div class="font-weight-bold">
+                                <div class="text-truncate"><span>Am I a good boy? The reason I ask is because someone told me that people say this to all dogs, even if they aren't good...</span></div>
+                                <p class="small text-gray-500 mb-0">Chicken the Dog · 2w</p>
+                            </div>
+                        </a><a class="text-center dropdown-item small text-gray-500" href="#">Show All Alerts</a></div>
+    </div>
+    <div class="shadow dropdown-list dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown"></div>
+    </li>
+    <div class="d-none d-sm-block topbar-divider"></div>
+    <li class="nav-item dropdown no-arrow" role="presentation">
+        <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><span class="d-none d-lg-inline mr-2 text-gray-600 small">Tadeuz Shermann</span><img class="border rounded-circle img-profile" src="assets/img/eccentex%20hat.png?h=6279900a87d137fab84ac2a23167f84a"></a>
+            <div
+                class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu"><a class="dropdown-item" role="presentation" href="profile.html"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Profile</a><a class="dropdown-item" role="presentation" href="activityLog.html"><i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Activity log</a>
+                <a
+                    class="dropdown-item disabled" role="presentation" href="#"><i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Other</a>
+                    <div class="dropdown-divider"></div><a class="dropdown-item" role="presentation" href="login.html"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Logout</a></div>
+</div>
+</li>
+</ul>
+        </div>
+          </nav>
+        <div class="container-fluid">
+          <h3 class="text-dark mb-4">Profile</h3>
+          <div class="row mb-3">
+            <div class="col-lg-12">
+              <div class="card shadow mb-3">
+                <div class="card-header py-3">
+                    <p class="text-primary m-0 font-weight-bold">User Settings</p>
+                </div>
+                <div class="card-body">
+                  <form>
+                    <div class="form-row">
+                        <div class="col">
+                            <div class="form-group">
+                              <label for="username"><strong>Username</strong></label>
+                              <input class="form-control" type="text" placeholder="tshermann2020" name="username" id="iUserName">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                              <label for="email"><strong>Email Address</strong></label>
+                              <input class="form-control" type="email" placeholder="tshermann@email.com" name="email" id="iEmail">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col">
+                            <div class="form-group">
+                              <label for="first_name"><strong>First Name</strong></label>
+                              <input class="form-control" type="text" placeholder="Tadeuz" name="first_name" id="iFirstName">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                              <label for="last_name"><strong>Last Name</strong></label>
+                              <input class="form-control" type="text" placeholder="Shermann" name="last_name" id="iLastName">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                      <button class="btn btn-primary btn-sm" type="submit">Save Settings</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div class="card shadow">
+                  <div class="card-header py-3">
+                      <p class="text-primary m-0 font-weight-bold">Contact Settings</p>
+                  </div>
+                  <div class="card-body">
+                      <form>
+                          <div class="form-group"><label for="address"><strong>Address</strong></label><input class="form-control" type="text" placeholder="123  Main St." name="address"></div>
+                          <div class="form-row">
+                              <div class="col">
+                                  <div class="form-group"><label for="city"><strong>City</strong></label><input class="form-control" type="text" placeholder="Los Angeles" name="city"></div>
+                              </div>
+                              <div class="col">
+                                  <div class="form-group"><label for="country"><strong>Country</strong></label><input class="form-control" type="text" placeholder="USA" name="country"></div>
+                              </div>
+                          </div>
+                          <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Save&nbsp;Settings</button></div>
+                      </form>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <footer class="bg-white sticky-footer">
+      <div class="container my-auto">
+        <div class="text-center my-auto copyright"><span>Copyright © Eccentex 2020</span></div>
+      </div>
+    </footer>
+    </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+    <script src="assets/js/script.min.js?h=4cbf5b825cfb8d41a431350df90680c7"></script>
+  </body>
+
+</html>

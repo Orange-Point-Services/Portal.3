@@ -31,49 +31,7 @@ function onSignInAction() {
         return;
     }
     sessionStorage.setItem("sLogin", login);
- /*
-     var url = String.format('{0}Security.WebService/AuthenticationServiceRest.svc/login.post', Config.siteUrl);
-
-    $.ajax({
-        url: url,
-        type: 'POST',
-        data: {
-            u: login,
-            p: password
-        },
-        success: function(token) {
-            saveTokenIntoCookie(token);
-            saveLoginIntoCookie(login);
-            $('#username').text(login);
-            //loadUserCases(122);
-
-            //init form
-            $('#login-modal').modal('hide');
-            //            $("#login-modal").modal({ show: false });
-
-            swal({
-                    title: 'Success',
-                    text: 'You have successfully logged in',
-                    timer: 1000,
-                    type: 'success',
-                    showConfirmButton: false
-                },
-                function() {
-                    location.reload();
-                });
-        },
-        error: function(xhr, error) {
-            swal({
-                title: 'Warning',
-                text: 'Invalid User or Password',
-                type: 'warning'
-            });
-        }
-    });
-*/
-
     var url = String.format('{0}Security.WebService/AuthenticationServiceRest.svc/login.post', Config.siteUrl);
-
     $.ajax({
         url: url,
         type: 'POST',
@@ -86,8 +44,8 @@ function onSignInAction() {
             saveTokenIntoCookie(token);
             saveLoginIntoCookie(login);
             sessionStorage.setItem("sToken", token);
-            //loadUserCases(122);
-//            window.location.replace("./index.html");
+            loadUserCases(122);
+            window.location.replace("./index.html");
         },
         error: function(xhr, error) {
             alert(error);

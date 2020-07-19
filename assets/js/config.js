@@ -1,11 +1,10 @@
 var Config = {
     fakeUpload: false,
     cmsRootPath: '',
-    //site url  https://dcmsales.eccentex.com/Ecx.Web?appid=ROOT_CASEMANAGEMENT&d=DCM_PURECLOUD_PRODUCTION.TENANT1&t=
-    siteUrl: 'https://dcmsales.eccentex.com/',
-    //from url d={#} 
-    // appBaseDomain: 'DCM_PRODUCTION.TENANT12',
-    appBaseDomain: 'DCM_PURECLOUD_PRODUCTION.TENANT1',
+    //site url  https://trydcm.eccentex.com/Ecx.Web?appid=ROOT_CASEMANAGEMENT&d=DCM_TRAINING_PRODUCTION.TENANT61
+    siteUrl:   'https://trydcm.eccentex.com/',
+    //from url d={#}
+    appBaseDomain: 'DCM_TRAINING_PRODUCTION.TENANT61',
     //Config.TOKEN_SYSTEMDOMAIN
     appBaseTokenSystemDomain: 'config.tenant1',
 //  Rules

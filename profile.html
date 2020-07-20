@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Profile</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>"
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css?h=be3ee106ada8c36692e11907c6fa01ba">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
@@ -15,6 +17,7 @@
     <!--  DCM Scripts - Inside <head> -->
     <script src="assets/js/config.js"></script>
     <script src="assets/js/profile.js"></script>
+    <script src="assets/data/sample.js"></script>
     <script>
       var sToken = sessionStorage.getItem("sToken");
   //    alert("sToken: " + sToken);
@@ -24,6 +27,7 @@
       if (!sToken) {
         window.location.assign("login.html");
       };
+      loadUserProfileData();
     </script>
     </head>
   <body id="page-top">
@@ -177,29 +181,22 @@
                   <form>
                     <div class="form-row">
                         <div class="col">
-                            <div class="form-group">
-                              <label for="username"><strong>Username</strong></label>
-                              <input class="form-control" type="text" placeholder="tshermann2020" name="username" id="iUserName">
+                            <div class="form-group"><label for="username"><strong>Username</strong></label>
+                              <input class="form-control" type="text" name="username" id="iUserName">
                             </div>
                         </div>
                         <div class="col">
-                            <div class="form-group">
-                              <label for="email"><strong>Email Address</strong></label>
-                              <input class="form-control" type="email" placeholder="tshermann@email.com" name="email" id="iEmail">
-                            </div>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="col">
-                            <div class="form-group">
-                              <label for="first_name"><strong>First Name</strong></label>
-                              <input class="form-control" type="text" placeholder="Tadeuz" name="first_name" id="iFirstName">
+                            <div class="form-group"><label for="first_name"><strong>First Name</strong></label>
+                              <input class="form-control" type="text" name="first_name" id="iFirstName">
                             </div>
                         </div>
                         <div class="col">
-                            <div class="form-group">
-                              <label for="last_name"><strong>Last Name</strong></label>
-                              <input class="form-control" type="text" placeholder="Shermann" name="last_name" id="iLastName">
+                            <div class="form-group"><label for="last_name"><strong>Last Name</strong></label>
+                              <input class="form-control" type="text" name="last_name" id="iLastName">
                             </div>
                         </div>
                     </div>
@@ -214,18 +211,39 @@
                       <p class="text-primary m-0 font-weight-bold">Contact Settings</p>
                   </div>
                   <div class="card-body">
-                      <form>
-                          <div class="form-group"><label for="address"><strong>Address</strong></label><input class="form-control" type="text" placeholder="123  Main St." name="address"></div>
-                          <div class="form-row">
-                              <div class="col">
-                                  <div class="form-group"><label for="city"><strong>City</strong></label><input class="form-control" type="text" placeholder="Los Angeles" name="city"></div>
-                              </div>
-                              <div class="col">
-                                  <div class="form-group"><label for="country"><strong>Country</strong></label><input class="form-control" type="text" placeholder="USA" name="country"></div>
-                              </div>
+                    <form>
+                      <div class="form-row">
+                        <div class="col">
+                          <div class="form-group"><label for="email"><strong>eMail</strong></label>
+                            <input class="form-control" type="text" name="email" id="iEMail">
                           </div>
-                          <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Save&nbsp;Settings</button></div>
-                      </form>
+                      </div>
+                      <div class="col">
+                        <div class="form-group"><label for="phone"><strong>Phone</strong></label>
+                          <input class="form-control" type="text" name="phone" id="iPhone">
+                        </div>
+                      </div>
+                        <!--div class="col">
+                            <div class="form-group">
+                              <label for="country"><strong>State</strong></label>
+                              <input class="form-control" type="text" name="State">
+                            </div>
+                        </div-->
+                      </div>
+                      <div class="form-group"><label for="address"><strong>Address</strong></label>
+                        <input class="form-control" type="text"  name="address"></div>
+                        <div class="form-row">
+                            <div class="col">
+                                <div class="form-group"><label for="city"><strong>City</strong></label>
+                                  <input class="form-control" type="text"  name="city"></div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group"><label for="country"><strong>State</strong></label>
+                                  <input class="form-control" type="text"  name="state"></div>
+                            </div>
+                        </div>
+                        <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Save&nbsp;Settings</button></div>
+                    </form>
                   </div>
               </div>
             </div>

@@ -368,59 +368,65 @@ function loadUserProfileData() {
     var vLogin    = sessionStorage.getItem("sLogin");  //     getCookieByName(Config.getCookieLoginName());
     var vToken    = sessionStorage.getItem("sToken");  //     getCookieByName(Config.getCookieTokenName());
     $("#iUserName").val(vLogin);
-    console.log("vLogin : " + vLogin);
-  
-    var txtExtPartyID      = document.getElementById('txtExtPartyID');
-    var txtAccountFullName = document.getElementById('txtAccountFullName');
-    var txtAccountEmail    = document.getElementById('txtAccountEmail');
-    var txtAccountPhone    = document.getElementById('txtAccountPhone');
-
+    //console.log("vLogin : " + vLogin);
     if (vToken) {
         url += '?t=' + vToken;
     } else {
         return;
     }
 
-// // {"DATA":{"ROOT_CUST_PRTL_GETUSERINFO":
-// {"ITEMS":[
-//   {"USR_EMAIL":"tsherman@eccentex.com",
-//    "USR_PHONE":"1-949-235-9009","USR_NAME":"Tadeusz Sherman","USR_FIRSTNAME":"Tadeusz","USR_LASTNAME":"Sherman","USR_LASTLOGINDATE":1589230156000,"EP_ID":1,"PPL_EPAUPREPLYADDRESS":"rklusek1/domyslna","PPL_EMAIL2":"ttnow@live.com"}
-//  ],"VALIDATION":null,"IsValid":true}}}
-
+    //{"DATA":{"ROOT_CUST_PRTL_SUMMARYINFO":{"ITEMS":[{"CASETYPE1":15,"CASETYPE2":5,"CASETYPE3":50,"CASETYPE4":20,"CRITICAL":20,"MAYOR":40,"NORMAL":120,"TRIVIAL":20,"MINOR":0,"CRITICAL_PCT":10,"MAYOR_PCT":20,"NORMAL_PCT":60,"TRIVIAL_PCT":20,"MINOR_PCT":0}],"VALIDATION":null,"IsValid":true}}}
     $.ajax({
         dataType: 'text',
         url: url,
         type: 'POST',
         data: { login: vLogin },
         success: function(response) {
-            response = getCorrectJSON(response);
-//            console.log("response : "+response);
+          response = getCorrectJSON(response);
+// using sample data
+          var jsonResponse = userInfo  // JSON.parse(response);
+          if (jsonResponse && jsonResponse.ErrorCode === 500) {
+              return;
+          }
+          var data        = jsonResponse.DATA['ROOT_CUST_PRTL_GETUSERINFO'],
+              respSuccess = '';
+          if (data) {
+            respSuccess = data.ITEMS[0];
+            $("#iUserName").val(vLogin);
+            $("#iFirstName").val(respSuccess.USR_FIRSTNAME);
+            $("#iLastName").val(respSuccess.USR_LASTNAME);
+//
+            //$("#lastLogin").text(respSuccess.USR_LASTLOGINDATE);
+            $("#iEMail").val(respSuccess.USR_EMAIL);
+            $("#iPhone").val(respSuccess.USR_PHONE)
+            console.log("lastLogin= " + respSuccess.USR_LASTLOGINDATE);
+          }
+        },
+        error: function() {
+            swal({
+                title: 'Warning',
+                text: 'Error Loading User Profile Data. Please contact your Administrator',
+                type: 'warning'
+            });
+            response = userInfo //getCorrectJSON(response);
+            console.log("response : "+response);
             var jsonResponse = JSON.parse(response);
             if (jsonResponse && jsonResponse.ErrorCode === 500) {
                 return;
             }
-
             var data        = jsonResponse.DATA['ROOT_CUST_PRTL_GETUSERINFO'],
                 respSuccess = '';
 //            console.log("DATA "+data);
             if (data) {
                 respSuccess = data.ITEMS[0];
-                txtExtPartyID.value       = respSuccess.EP_ID;
-                txtAccountFullName.value  = respSuccess.USR_NAME;
-                txtAccountEmail.value     = respSuccess.USR_EMAIL;
-                txtAccountPhone.value     = respSuccess.USR_PHONE;
-                $("#txtPesel").val(respSuccess.PPL_PESEL);
+                iUserName.value  = respSuccess.USR_NAME;
+                iEmail.value     = respSuccess.USR_EMAIL;
+                $("#iFirstName").val(respSuccess.USR_FIRSTNAME);
+                $("#iLastName").val(respSuccess.USR_LASTNAME);
                 $("#lastLogin").text(respSuccess.USR_LASTLOGINDATE);
                 console.log("EP= "+ respSuccess.EP_ID);
                 console.log("lastLogin= "+ respSuccess.USR_LASTLOGINDATE);
             }
-        },
-        error: function(xhr, error) {
-            swal({
-                title: 'Warning',
-                text: 'Loading User Profile Error. Please contact your Administrator',
-                type: 'warning'
-            });
         }
     });
 }

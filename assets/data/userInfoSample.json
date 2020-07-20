@@ -1,0 +1,19 @@
+{
+  "DATA": {
+    "ROOT_CUST_PRTL_GETUSERINFO": {
+      "ITEMS": [
+        {
+          "USR_EMAIL": "tsherman@eccentex.com",
+          "USR_PHONE": "1-949-235-9009",
+          "USR_NAME": "Tadeusz Sherman",
+          "USR_FIRSTNAME": "Tadeusz",
+          "USR_LASTNAME": "Sherman",
+          "USR_LASTLOGINDATE": 1589230156000,
+          "EP_ID": 1
+        }
+      ],
+      "VALIDATION": null,
+      "IsValid": true
+    }
+  }
+}

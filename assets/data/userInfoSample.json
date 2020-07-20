@@ -9,7 +9,10 @@
           "USR_FIRSTNAME": "Tadeusz",
           "USR_LASTNAME": "Sherman",
           "USR_LASTLOGINDATE": 1589230156000,
-          "EP_ID": 1
+          "EP_ID": 1,
+          "EP_ADDRESS": "123 Main St.",
+          "EP_CITY": "Los Angeles",
+          "EP_STATE" : "CA"
         }
       ],
       "VALIDATION": null,

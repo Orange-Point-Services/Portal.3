@@ -364,69 +364,130 @@ function loadUserInformation() {
 }
 //Load User Profile Data
 function loadUserProfileData() {
-    var url = String.format('{0}BDS.WebService/DataServiceRest.svc/post/{1}/ROOT_CUST_PRTL_GETUSERINFO', Config.siteUrl, Config.appBaseDomain);
-    var vLogin    = sessionStorage.getItem("sLogin");  //     getCookieByName(Config.getCookieLoginName());
-    var vToken    = sessionStorage.getItem("sToken");  //     getCookieByName(Config.getCookieTokenName());
-    $("#iUserName").val(vLogin);
-    //console.log("vLogin : " + vLogin);
-    if (vToken) {
-        url += '?t=' + vToken;
-    } else {
-        return;
-    }
+  var url = String.format('{0}BDS.WebService/DataServiceRest.svc/post/{1}/ROOT_CUST_PRTL_GETUSERINFO', Config.siteUrl, Config.appBaseDomain);
+  var vLogin       = sessionStorage.getItem("sLogin");  //     getCookieByName(Config.getCookieLoginName());
+  var vToken       = sessionStorage.getItem("sToken");  //     getCookieByName(Config.getCookieTokenName());
+  $("#iUserName").val(vLogin);
 
-    //{"DATA":{"ROOT_CUST_PRTL_SUMMARYINFO":{"ITEMS":[{"CASETYPE1":15,"CASETYPE2":5,"CASETYPE3":50,"CASETYPE4":20,"CRITICAL":20,"MAYOR":40,"NORMAL":120,"TRIVIAL":20,"MINOR":0,"CRITICAL_PCT":10,"MAYOR_PCT":20,"NORMAL_PCT":60,"TRIVIAL_PCT":20,"MINOR_PCT":0}],"VALIDATION":null,"IsValid":true}}}
-    $.ajax({
-        dataType: 'text',
-        url: url,
-        type: 'POST',
-        data: { login: vLogin },
-        success: function(response) {
-          response = getCorrectJSON(response);
+  // var vFirstName = sessionStorage.getItem("sFirstName");
+  // var vLastName  = sessionStorage.getItem("sLastName");
+  // var vEMail     = sessionStorage.getItem("sEMail");
+  // var vPhone     = sessionStorage.getItem("sPhone");
+  // var vFullName  = sessionStorage.getItem("sFullName");
+
+  // if (vFirstName&&vLastName) {
+  //   $("#iUserName").val(vLogin);
+  //   $("#iBarFullName").html("<span class=\"d-none d-lg-inline mr-2 text-gray-600 small\">"+ vFullName +"</span><img class=\"border rounded-circle img-profile\" src=\"assets/img/eccentex%20hat.png?h=6279900a87d137fab84ac2a23167f84a\">");
+  //   $("#iFirstName").val(vFirstName);
+  //   $("#iLastName").val(vLastName);
+  //   $("#iEMail").val(vEMail);
+  //   $("#iPhone").val(vPhone);
+  //   return;
+  // }
+
+  if (vToken) {
+      url += '?t=' + vToken;
+  } else {
+      return;
+  }
+  //{"DATA":{"ROOT_CUST_PRTL_SUMMARYINFO":{"ITEMS":[{"CASETYPE1":15,"CASETYPE2":5,"CASETYPE3":50,"CASETYPE4":20,"CRITICAL":20,"MAYOR":40,"NORMAL":120,"TRIVIAL":20,"MINOR":0,"CRITICAL_PCT":10,"MAYOR_PCT":20,"NORMAL_PCT":60,"TRIVIAL_PCT":20,"MINOR_PCT":0}],"VALIDATION":null,"IsValid":true}}}
+  $.ajax({
+    dataType: 'text',
+    url: url,
+    type: 'POST',
+    data: { login: vLogin },
+    success: function(response) {
+      response = getCorrectJSON(response);
 // using sample data
-          var jsonResponse = userInfo  // JSON.parse(response);
-          if (jsonResponse && jsonResponse.ErrorCode === 500) {
-              return;
-          }
-          var data        = jsonResponse.DATA['ROOT_CUST_PRTL_GETUSERINFO'],
-              respSuccess = '';
-          if (data) {
-            respSuccess = data.ITEMS[0];
-            $("#iUserName").val(vLogin);
-            $("#iFirstName").val(respSuccess.USR_FIRSTNAME);
-            $("#iLastName").val(respSuccess.USR_LASTNAME);
+      var jsonResponse = userInfo  // JSON.parse(response);
+      if (jsonResponse && jsonResponse.ErrorCode === 500) {
+          return;
+      }
+      var data        = jsonResponse.DATA['ROOT_CUST_PRTL_GETUSERINFO'],
+          respSuccess = '';
+      if (data) {
+        respSuccess = data.ITEMS[0];
+        console.log("lastLogin= " + respSuccess.USR_LASTLOGINDATE);
+        var vFirstName = respSuccess.USR_FIRSTNAME;
+        var vLastName  = respSuccess.USR_LASTNAME;
+        var vEMail     = respSuccess.USR_EMAIL;
+        var vPhone     = respSuccess.USR_PHONE;
+        var vFullName  = respSuccess.USR_NAME;
 //
-            //$("#lastLogin").text(respSuccess.USR_LASTLOGINDATE);
-            $("#iEMail").val(respSuccess.USR_EMAIL);
-            $("#iPhone").val(respSuccess.USR_PHONE)
-            console.log("lastLogin= " + respSuccess.USR_LASTLOGINDATE);
-          }
-        },
-        error: function() {
-            swal({
-                title: 'Warning',
-                text: 'Error Loading User Profile Data. Please contact your Administrator',
-                type: 'warning'
-            });
-            response = userInfo //getCorrectJSON(response);
-            console.log("response : "+response);
-            var jsonResponse = JSON.parse(response);
-            if (jsonResponse && jsonResponse.ErrorCode === 500) {
-                return;
-            }
-            var data        = jsonResponse.DATA['ROOT_CUST_PRTL_GETUSERINFO'],
-                respSuccess = '';
-//            console.log("DATA "+data);
-            if (data) {
-                respSuccess = data.ITEMS[0];
-                iUserName.value  = respSuccess.USR_NAME;
-                iEmail.value     = respSuccess.USR_EMAIL;
-                $("#iFirstName").val(respSuccess.USR_FIRSTNAME);
-                $("#iLastName").val(respSuccess.USR_LASTNAME);
-                $("#lastLogin").text(respSuccess.USR_LASTLOGINDATE);
-                console.log("EP= "+ respSuccess.EP_ID);
-                console.log("lastLogin= "+ respSuccess.USR_LASTLOGINDATE);
-            }
-        }
-    });
+        // sessionStorage.setItem("sFirstName",vFirstName);
+        // sessionStorage.setItem("sLastName",vLastName);
+        // sessionStorage.setItem("sEMail",vEMail);
+        // sessionStorage.setItem("sPhone",vPhone);
+        // sessionStorage.setItem("sFullName",vFullName);
+//
+        $("#iUserName").val(vLogin);
+        $("#iBarFullName").html("<span class=\"d-none d-lg-inline mr-2 text-gray-600 small\">"+ vFullName +"</span><img class=\"border rounded-circle img-profile\" src=\"assets/img/eccentex%20hat.png?h=6279900a87d137fab84ac2a23167f84a\">");
+        $("#iFirstName").val(vFirstName);
+        $("#iLastName").val(vLastName);
+//
+        //$("#lastLogin").text(respSuccess.USR_LASTLOGINDATE);
+        $("#iEMail").val(vEMail);
+        $("#iPhone").val(vPhone)
+        $("#iAddress").val(respSuccess.EP_ADDRESS);
+        $("#iCity").val(respSuccess.EP_CITY);
+        $("#iState").val(respSuccess.EP_STATE);
+      }
+    },
+    error: function() {
+      swal({
+        title: 'Warning',
+        text: 'Error Loading User Profile Data. Please contact your Administrator',
+        type: 'warning'
+      });
+    }
+  });
+}
+
+//Load User Profile Data
+function loadSummaryInfo() {
+  var url = String.format('{0}BDS.WebService/DataServiceRest.svc/post/{1}/ROOT_CUST_PRTL_GETUSERINFO', Config.siteUrl, Config.appBaseDomain);
+  var vLogin       = sessionStorage.getItem("sLogin");  //     getCookieByName(Config.getCookieLoginName());
+  var vToken       = sessionStorage.getItem("sToken");  //     getCookieByName(Config.getCookieTokenName());
+
+  if (vToken) {
+      url += '?t=' + vToken;
+  } else {
+      return;
+  }
+  //{"DATA":{"ROOT_CUST_PRTL_SUMMARYINFO":{"ITEMS":[{"CASETYPE1":15,"CASETYPE2":5,"CASETYPE3":50,"CASETYPE4":20,"CRITICAL":20,"MAYOR":40,"NORMAL":120,"TRIVIAL":20,"MINOR":0,"CRITICAL_PCT":10,"MAYOR_PCT":20,"NORMAL_PCT":60,"TRIVIAL_PCT":20,"MINOR_PCT":0}],"VALIDATION":null,"IsValid":true}}}
+  $.ajax({
+    dataType: 'text',
+    url: url,
+    type: 'POST',
+    data: { login: vLogin },
+    success: function(response) {
+      response = getCorrectJSON(response);
+// using sample data
+      var jsonResponse = summaryInfo  // JSON.parse(response);
+      if (jsonResponse && jsonResponse.ErrorCode === 500) {
+          return;
+      }
+      var data        = jsonResponse.DATA['ROOT_CUST_PRTL_SUMMARYINFO'],
+          respSuccess = '';
+      if (data) {
+        respSuccess = data.ITEMS[0];
+        var vCaseType1   = respSuccess.CASETYPE1;
+        var vCaseType2   = respSuccess.CASETYPE2;
+        var vCaseType3    = respSuccess.CASETYPE3;
+        var vCaseType4   = respSuccess.CASETYPE4;
+        var vCritical    = respSuccess.CRITICAL;
+        var vCriticalPct = respSuccess.CRITICAL_PCT;
+
+        $("#pbCritical").html("Critical ("+vCritical+")<span class=\"float-right\">"+vCriticalPct+"%</span>");
+        $("#pbCriticalPct").html("<span class=\"sr-only\">"+vCriticalPct+"%</span>");
+      }
+    },
+    error: function() {
+      swal({
+        title: 'Warning',
+        text: 'Error Loading User Profile Data. Please contact your Administrator',
+        type: 'warning'
+      });
+    }
+  });
 }

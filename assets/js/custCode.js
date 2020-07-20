@@ -478,8 +478,8 @@ function loadSummaryInfo() {
         var vCritical    = respSuccess.CRITICAL;
         var vCriticalPct = respSuccess.CRITICAL_PCT;
 
-        $("#pbCritical").html("Critical ("+vCritical+")<span class=\"float-right\">"+vCriticalPct+"%</span>");
-        $("#pbCriticalPct").html("<span class=\"sr-only\">"+vCriticalPct+"%</span>");
+        $("#pbCritical").html("Critical<span class=\"float-right\">"+vCritical+"</span>");
+        $("#pbCriticalPct").html(vCriticalPct+"%");
       }
     },
     error: function() {

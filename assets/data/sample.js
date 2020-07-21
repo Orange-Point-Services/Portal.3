@@ -26,20 +26,24 @@ var summaryInfo = {
     "ROOT_CUST_PRTL_SUMMARYINFO": {
       "ITEMS": [
         {
-          "CASETYPE1": 15,
-          "CASETYPE2": 5,
-          "CASETYPE3": 50,
+          "CASETYPE1_NAME": "General Inquiry",
+          "CASETYPE2_NAME": "Payment Request",
+          "CASETYPE3_NAME": "Auto Loan",
+          "CASETYPE4_NAME": "Work Order",
+          "CASETYPE1": 80,
+          "CASETYPE2": 60,
+          "CASETYPE3": 40,
           "CASETYPE4": 20,
-          "CRITICAL": 20,
-          "MAYOR": 40,
-          "NORMAL": 120,
-          "TRIVIAL": 20,
-          "MINOR": 0,
-          "CRITICAL_PCT": 10,
-          "MAYOR_PCT": 20,
-          "NORMAL_PCT": 60,
-          "TRIVIAL_PCT": 10,
-          "MINOR_PCT": 0
+          "CRITICAL": 10,
+          "MAYOR": 30,
+          "NORMAL": 100,
+          "TRIVIAL": 40,
+          "MINOR": 20,
+          "CRITICAL_PCT": 5,
+          "MAYOR_PCT": 15,
+          "NORMAL_PCT": 50,
+          "TRIVIAL_PCT": 20,
+          "MINOR_PCT": 10
         }
       ],
       "VALIDATION": null,

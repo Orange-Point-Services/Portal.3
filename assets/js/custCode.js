@@ -472,10 +472,18 @@ function loadSummaryInfo() {
       if (data) {
         respSuccess = data.ITEMS[0];
 //
-        var vCaseType1   = respSuccess.CASETYPE1;
-        var vCaseType2   = respSuccess.CASETYPE2;
-        var vCaseType3    = respSuccess.CASETYPE3;
-        var vCaseType4   = respSuccess.CASETYPE4;
+        var vCaseType1       = respSuccess.CASETYPE1;
+        var vCaseTypeName1   = respSuccess.CASETYPE1_NAME;
+        $("#cbCaseType1").html("<div class=\"text-uppercase text-primary font-weight-bold text-xs mb-1\">"+vCaseTypeName1+"</div><div class=\"text-dark font-weight-bold h5 mb-0\">"+vCaseType1+"</div>");
+        var vCaseType2       = respSuccess.CASETYPE2;
+        var vCaseTypeName2   = respSuccess.CASETYPE2_NAME;
+        $("#cbCaseType2").html("<div class=\"text-uppercase text-primary font-weight-bold text-xs mb-1\">"+vCaseTypeName2+"</div><div class=\"text-dark font-weight-bold h5 mb-0\">"+vCaseType2+"</div>");
+        var vCaseType3       = respSuccess.CASETYPE3;
+        var vCaseTypeName3   = respSuccess.CASETYPE3_NAME;
+        $("#cbCaseType3").html("<div class=\"text-uppercase text-primary font-weight-bold text-xs mb-1\">"+vCaseTypeName3+"</div><div class=\"text-dark font-weight-bold h5 mb-0\">"+vCaseType3+"</div>");
+        var vCaseType4       = respSuccess.CASETYPE4;
+        var vCaseTypeName4   = respSuccess.CASETYPE4_NAME;
+        $("#cbCaseType4").html("<div class=\"text-uppercase text-primary font-weight-bold text-xs mb-1\">"+vCaseTypeName4+"</div><div class=\"text-dark font-weight-bold h5 mb-0\">"+vCaseType4+"</div>");
 //
         var vCritical    = respSuccess.CRITICAL;
         var vCriticalPct = respSuccess.CRITICAL_PCT;

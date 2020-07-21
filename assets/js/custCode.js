@@ -471,15 +471,32 @@ function loadSummaryInfo() {
           respSuccess = '';
       if (data) {
         respSuccess = data.ITEMS[0];
+//
         var vCaseType1   = respSuccess.CASETYPE1;
         var vCaseType2   = respSuccess.CASETYPE2;
         var vCaseType3    = respSuccess.CASETYPE3;
         var vCaseType4   = respSuccess.CASETYPE4;
+//
         var vCritical    = respSuccess.CRITICAL;
         var vCriticalPct = respSuccess.CRITICAL_PCT;
-
         $("#pbCritical").html("Critical<span class=\"float-right\">"+vCritical+"</span>");
-        $("#pbCriticalPct").html(vCriticalPct+"%");
+        $("#pbCriticalPct").html("<div class=\"progress-bar bg-danger\" aria-valuenow=\"0\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: "+vCriticalPct+"%;\">"+vCriticalPct+"%</div>");
+        var vMayor    = respSuccess.MAYOR;
+        var vMayorPct = respSuccess.MAYOR_PCT;
+        $("#pbMayor").html("Mayor<span class=\"float-right\">"+vMayor+"</span>");
+        $("#pbMayorPct").html("<div class=\"progress-bar bg-warning\" aria-valuenow=\"0\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: "+vMayorPct+"%;\">"+vMayorPct+"%</div>");
+        var vNormal    = respSuccess.NORMAL;
+        var vNormalPct = respSuccess.NORMAL_PCT;
+        $("#pbNormal").html("Normal<span class=\"float-right\">"+vNormal+"</span>");
+        $("#pbNormalPct").html("<div class=\"progress-bar bg-info\" aria-valuenow=\"0\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: "+vNormalPct+"%;\">"+vNormalPct+"%</div>");
+        var vTrivial    = respSuccess.TRIVIAL;
+        var vTrivialPct = respSuccess.TRIVIAL_PCT;
+        $("#pbTrivial").html("Trivial<span class=\"float-right\">"+vTrivial+"</span>");
+        $("#pbTrivialPct").html("<div class=\"progress-bar bg-success\" aria-valuenow=\"0\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: "+vTrivialPct+"%;\">"+vTrivialPct+"%</div>");
+        var vMinor    = respSuccess.MINOR;
+        var vMinorPct = respSuccess.MINOR_PCT;
+        $("#pbMinor").html("Minor<span class=\"float-right\">"+vMinor+"</span>");
+        $("#pbMinorPct").html("<div class=\"progress-bar bg-success\" aria-valuenow=\"0\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: "+vMinorPct+"%;\">"+vMinorPct+"%</div>");
       }
     },
     error: function() {

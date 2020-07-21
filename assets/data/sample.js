@@ -30,7 +30,7 @@ var summaryInfo = {
           "CASETYPE2": 5,
           "CASETYPE3": 50,
           "CASETYPE4": 20,
-          "CRITICAL": 10,
+          "CRITICAL": 20,
           "MAYOR": 40,
           "NORMAL": 120,
           "TRIVIAL": 20,
@@ -38,7 +38,7 @@ var summaryInfo = {
           "CRITICAL_PCT": 10,
           "MAYOR_PCT": 20,
           "NORMAL_PCT": 60,
-          "TRIVIAL_PCT": 20,
+          "TRIVIAL_PCT": 10,
           "MINOR_PCT": 0
         }
       ],

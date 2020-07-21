@@ -188,31 +188,29 @@
                 </div>
               </li>
               <div class="d-none d-sm-block topbar-divider"></div>
+              <!-- Start Dropdown: Presentation -->
               <li class="nav-item dropdown no-arrow" role="presentation">
                 <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown"
-                    aria-expanded="false" href="#"><span class="d-none d-lg-inline mr-2 text-gray-600 small">Tadeuz
+                    aria-expanded="false" href="#" id="ddFullName"><span class="d-none d-lg-inline mr-2 text-gray-600 small">Tadeuz
                       Shermann</span><img class="border rounded-circle img-profile"
                       src="assets/img/eccentex%20hat.png?h=6279900a87d137fab84ac2a23167f84a"></a>
                   <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu">
-                    <a class="dropdown-item" role="presentation" href="profile.html"><i
-                        class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Profile</a>
-                    <a class="dropdown-item" role="presentation" href="activityLog.html"><i
-                        class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Activity log</a>
-                    <a class="dropdown-item disabled" role="presentation" href="#"><i
-                        class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Other</a>
+                    <a class="dropdown-item" role="presentation" href="profile.html"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Profile</a>
+                    <a class="dropdown-item" role="presentation" href="activityLog.html"><i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Activity log</a>
+                    <a class="dropdown-item disabled" role="presentation" href="#"><i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Other</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" role="presentation" onclick="logOutAction();" href="#"><i
-                        class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Logout</a>
+                    <a class="dropdown-item" role="presentation" onclick="sessionStorage.clear();" href="./login.html"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Logout</a>
                   </div>
                 </div>
               </li>
+              <!-- END Dropdown: Presentation -->
             </ul>
           </div>
         </nav>
+        <!-- Start Container: Case Types -->
         <div class="container">
           <div class="d-sm-flex justify-content-between align-items-center">
-            <h3 class="text-dark mb-0">Home</h3><a class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button"
-              href="#"><i class="fas fa-download fa-sm text-white-50"></i>&nbsp;Generate Report</a>
+            <h3 class="text-dark mb-0">Case Types Distribution</h3>
           </div>
           <!-- Start: Cards for Case Types-->
           <div class="row d-flex">
@@ -270,13 +268,20 @@
             </div>
           </div>
           <!-- End: Cards -->
-          <!-- Start: Chart -->
+        </div>
+        <!-- END Container: Case Types   -->
+        <!-- Start Container: Pirorities -->
+        <div class="container">
+            <div class="d-sm-flex justify-content-between align-items-center">
+              <h3 class="text-dark mb-0">Cases by Priority</h3>
+            </div>  
+          <!-- Start: Progress Bars for Priorities -->
           <div class="row d-flex">
             <div class="col-lg-4">
               <div class="card shadow mb-4">
-                <div class="card-header py-3">
+                <!--div class="card-header py-3">
                   <h6 class="text-primary font-weight-bold m-0">Cases by Priority</h6>
-                </div>
+                </div-->
                 <!-- Start: Progress Bars for Priorities-->
                 <div class="card-body">
                   <h4 class="small font-weight-bold" id="pbCritical">Critical<span class="float-right">0</span></h4>
@@ -308,22 +313,36 @@
                 <!-- End: Progress Bars -->
               </div>
             </div>
+          </div>
+          <!-- End: Progress -->
+        </div>
+        <!-- END Container: Pirorities   -->
+        <!-- Start Container: Graph -->
+        <div class="container">
+          <!--div class="d-sm-flex justify-content-between align-items-center">
+            <h3 class="text-dark mb-0">Incoming Cases Last 6 Months</h3>
+          </div-->  
+          <div class="row d-flex">
+            <div class="col-lg-4"></div></div>
+          <!-- Start: Chart -->
+          <div class="row d-flex">
             <div class="col-lg-8">
               <div class="card shadow mb-4">
-                <div class="card-header">
+                <!--div class="card-header">
                   <h6 class="text-primary font-weight-bold m-0">Incoming Cases Last 6 Months</h6>
-                </div>
+                </div-->
                 <!-- Start: Graph -->
-                <div class="card-body">
+                <!--div class="card-body">
                   <div><canvas data-bs-chart="{&quot;type&quot;:&quot;line&quot;,&quot;data&quot;:{&quot;labels&quot;:[&quot;January&quot;,&quot;February&quot;,&quot;March&quot;,&quot;April&quot;,&quot;May&quot;,&quot;June&quot;],&quot;datasets&quot;:[{&quot;label&quot;:&quot;Incidents&quot;,&quot;backgroundColor&quot;:&quot;#4e73df&quot;,&quot;borderColor&quot;:&quot;#4e73df&quot;,&quot;data&quot;:[&quot;10&quot;,&quot;20&quot;,&quot;60&quot;,&quot;15&quot;,&quot;80&quot;,&quot;60&quot;],&quot;fill&quot;:false}]},&quot;options&quot;:{&quot;maintainAspectRatio&quot;:true,&quot;legend&quot;:{&quot;display&quot;:false},&quot;title&quot;:{&quot;display&quot;:false,&quot;text&quot;:&quot;&quot;}}}"></canvas>
                   </div>
-                </div>
+                </div-->
                 <!-- End: Graph -->
               </div>
             </div>
           </div>
           <!-- End: Chart -->
         </div>
+        <!-- END Container: Graph -->
       </div>
       <footer class="bg-white sticky-footer">
         <div class="container my-auto">
@@ -336,7 +355,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
-  <!--script src="assets/js/script.min.js?h=4cbf5b825cfb8d41a431350df90680c7"></script-->
+  <script src="assets/js/script.min.js?h=4cbf5b825cfb8d41a431350df90680c7"></script>
 </body>
 
 </html>

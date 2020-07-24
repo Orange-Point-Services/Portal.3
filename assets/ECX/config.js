@@ -1,12 +1,12 @@
 var Config = {
     fakeUpload: false,
     cmsRootPath: '',
-    //site url  https://trydcm.eccentex.com/Ecx.Web?appid=ROOT_CASEMANAGEMENT&d=DCM_TRAINING_PRODUCTION.TENANT61
+    //site url  https://trydcm.eccentex.com/Ecx.Web?appid=ROOT_CASEMANAGEMENT&d=DCM_TRAINING_PRODUCTION.TENANT82
     siteUrl:   'https://trydcm.eccentex.com/',
     //from url d={#}
-    appBaseDomain: 'DCM_TRAINING_PRODUCTION.TENANT61',
+    appBaseDomain: 'DCM_PRODUCTION.TENANT82',
     //Config.TOKEN_SYSTEMDOMAIN
-    appBaseTokenSystemDomain: 'config.tenant1',
+    appBaseTokenSystemDomain: 'config.tenant82',
 //  Rules
     caseCreateRule     : 'root_MDM_CreateCaseWithDataFn',
     caseGetTypesRule   : 'root_STP_getCaseTypes',

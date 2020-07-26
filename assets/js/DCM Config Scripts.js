@@ -1,16 +1,10 @@
-//
     <!--  DCM Scripts - login.html -->
-    <script src="assets/ECX/config.js"></script>
-    <script src="assets/ECX/custCode.js"></script>
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/profile.js"></script>
     <script>
-      var sToken = sessionStorage.getItem("sToken");
-  //    alert("sToken: " + sToken);
-      var token  = getCookieByName(Config.getCookieTokenName());
-  //    alert("token: " + token);
-      // check if token exists:
-      if (sToken) {
-        window.location.assign("index.html");
-      };
+        $("#login_form").submit(function () {
+            onSignInAction();
+        });
     </script>
 /////////////////////////////////////
 <!--  DCM Scripts - Inside <head> -->

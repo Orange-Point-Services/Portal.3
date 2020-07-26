@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-  <title>New Request</title>
-  <script src="assets/js/jquery.min.js?h=aae875cedbb1a508073f7e192800fafb"></script>
+  <title>Profile</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>"
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css?h=be3ee106ada8c36692e11907c6fa01ba">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
@@ -15,10 +16,10 @@
   <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css?h=2c0fc24b3d3038317dc51c05339856d0">
   <link rel="stylesheet" href="assets/css/styles.min.css?h=aae875cedbb1a508073f7e192800fafb">
   <!--  DCM Scripts - Inside <head> -->
-  <script src="assets/ECX/config.js"></script>
-  <script src="assets/ECX/custCode.js"></script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/custCode.js"></script>
   <script src="assets/data/sample.js"></script>
-  <!-- <script>
+  <script>
     var sToken = sessionStorage.getItem("sToken");
 //    alert("sToken: " + sToken);
     var token  = getCookieByName(Config.getCookieTokenName());
@@ -27,7 +28,7 @@
     if (!sToken) {
       window.location.assign("login.html");
     };
-  </script> -->
+  </script>
 </head>
 
 <body id="page-top">
@@ -115,7 +116,8 @@
                     </li>
                     <li class="nav-item dropdown no-arrow mx-1" role="presentation">
                         <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><i class="fas fa-envelope fa-fw" style="font-size: 22px;"></i><span class="badge badge-danger badge-counter" style="font-size: 16px;">7</span></a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-list dropdown-menu-right animated--grow-in" role="menu">
+                            <div
+                                class="dropdown-menu dropdown-menu-right dropdown-list dropdown-menu-right animated--grow-in" role="menu">
                                 <h6 class="dropdown-header">alerts center</h6>
                                 <a class="d-flex align-items-center dropdown-item" href="#">
                                     <div class="dropdown-list-image mr-3"><img class="rounded-circle" src="assets/img/avatars/avatar4.jpeg?h=fefb30b61c8459a66bd338b7d790c3d5">
@@ -199,50 +201,58 @@
                   <input class="form-control" type="text" id="from-message" name="Description" required="">
               </div>
             </div>
-            <div class="form-group"><label for="from-email">Email</label><span class="required-input"></span>
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+              <div class="form-group"><label for="from-email">Email</label><span class="required-input"></span>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                  </div>
+                  <input class="form-control" type="text" id="from-email" name="email">
                 </div>
-                <input class="form-control" type="text" id="from-email" name="email">
               </div>
-            </div>
             <div class="form-row">
-              <div class="col-12 col-sm-6 col-md-12 col-lg-6">
-                <div class="form-group"><label for="from-phone">Phone</label><span class="required-input">*</span>
-                  <div class="input-group">
-                    <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-phone"></i></span>
-                    </div><input class="form-control" type="tel" id="from-phone" name="phone" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"></div>
+            <div class="form-row">
+                <div class="col-12 col-sm-6 col-md-12 col-lg-6">
+                  <div class="form-group"><label for="from-phone">Phone</label><span class="required-input">*</span>
+                    <div class="input-group">
+                      <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-phone"></i></span></div>
+                        <input class="form-control" type="text" id="from-phone" name="phone">
+                      </div>
+                  </div>
                 </div>
-              </div>
-              <div class="col-12 col-sm-6 col-md-12 col-lg-6">
-                <div class="form-group"><label for="from-calltime">Best Time to Call</label>
-                  <div class="input-group">
-                    <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-clock-o"></i></span>
-                    </div>
-                    <select class="form-control" id="from-calltime" name="call time">
-                      <optgroup label="Best Time to Call">
-                        <option value="Morning" selected="">Morning</option>
-                        <option value="Afternoon">Afternoon</option>
-                        <option value="Evening">Evening</option>
-                      </optgroup>
-                    </select>
+                <div class="col-12 col-sm-6 col-md-12 col-lg-6">
+                  <div class="form-group"><label for="from-calltime">Best Time to Call</label>
+                    <!-- Start: Input Group -->
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="fa fa-clock-o"></i></span>
+                        </div>
+                        <select class="form-control" id="from-calltime" name="call time">
+                          <optgroup label="Best Time to Call">
+                            <option value="Morning" selected="">Morning</option>
+                            <option value="Afternoon">Afternoon</option>
+                            <option value="Evening">Evening</option>
+                          </optgroup>
+                        </select>
+                      </div>
+                    <!-- End: Input Group -->
                   </div>
                 </div>
               </div>
             </div>
-              <div class="form-group"><label for="from-comments">Comments</label>
-                <textarea class="form-control" id="from-comments" name="comments" rows="5"></textarea>
+              <div class="form-group">
+                  <label for="from-comments">Comments</label>
+                  <textarea class="form-control" id="from-comments" name="comments" rows="5"></textarea>
               </div>
               <div class="form-group">
-                <div class="form-row">
-                  <div class="col"><button class="btn btn-primary btn-block" type="reset"><i class="fa fa-undo"></i> Clear</button></div>
-                  <div class="col"><button class="btn btn-primary btn-block" type="submit">Submit <i class="fa fa-chevron-circle-right"></i></button></div>
-                </div>
+                    <div class="form-row">
+                        <div class="col"><button class="btn btn-primary btn-block" type="reset"><i class="fa fa-undo"></i> Clear</button></div>
+                        <div class="col"><button class="btn btn-primary btn-block" type="submit">Submit <i class="fa fa-chevron-circle-right"></i></button></div>
+                    </div>
               </div>
+              <hr class="d-flex d-md-none">
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
     </div>
     <!-- End: Full Page Form -->
     </div>

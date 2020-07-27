@@ -23,12 +23,9 @@
   <script src="assets/ECX/custCode.js"></script>
   <script>
     var sToken = sessionStorage.getItem("sToken");
-    var vSite  = Config.
 //    alert("sToken: " + sToken);
-    var token  = getCookieByName(Config.getCookieTokenName());
-//    alert("token: " + token);
     // check if token exists:
-    if (sToken) {
+      if (sToken) {
       window.location.assign("index.html");
     };
   </script>
@@ -73,8 +70,8 @@
                                         <hr>
                                         <!--div class="g-signin2" data-onsuccess="onSignIn"></div-->
                                       </form>
-                                    <div class="text-center"><a class="small" href="https://trydcm.eccentex.com">Site: https://trydcm.eccentex.com/</a></div>
-                                    <div class="text-center"><a class="small" href="#">Domain: DCM_TRAINING_PRODUCTION.TENANT61</a></div>
+                                    <div class="text-info" id="txtSiteURL">Site: </div>
+                                    <div class="text-info" id="txtDomain">AppBase Domain: </div>
                                 </div>
                             </div>
                         </div>
@@ -88,15 +85,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
     <!--script src="assets/js/script.min.js?h=4cbf5b825cfb8d41a431350df90680c7"></script-->
-    <!-- <script>
-        var token = sessionStorage.getItem("sToken");  //  getCookieByName(Config.getCookieTokenName());
-        // if (token) {
-        //     alert("Successfuly Login in.");
-        //     window.location.replace("./index.html");
-        // };
-        $("#btnLogin").click(function() {
-            onSignInAction();
-        });
-    </script> -->
+    <script>
+      var vSite  = Config.siteUrl;
+      var vDomain = Config.getRuntimeDomain();
+      $('#txtSiteURL').text('Site: ' + Config.siteUrl);
+      $('#txtDomain').text('AppBase Domain: ' + Config.getRuntimeDomain());
+    </script>
   </body>
 </html>

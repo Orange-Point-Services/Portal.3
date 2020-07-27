@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css?h=2c0fc24b3d3038317dc51c05339856d0">
     <link rel="stylesheet" href="assets/css/styles.min.css?h=aae875cedbb1a508073f7e192800fafb">
     <!--  DCM Scripts - Inside <head> -->
+<<<<<<< HEAD
     <script src="assets/js/config.js"></script>
     <script src="assets/js/custCode.js"></script>
 <<<<<<< HEAD
@@ -25,18 +26,22 @@
 =======
 >>>>>>> parent of c239fd0... folder arrangements
     <script src="assets/data/sample.js"></script>
+=======
+    <script src="assets/js/profile.js"></script>
+>>>>>>> parent of 3773301... Login & Session working
     <script>
-      var sToken = sessionStorage.getItem("sToken");
-  //    alert("sToken: " + sToken);
-      var token  = getCookieByName(Config.getCookieTokenName());
-  //    alert("token: " + token);
-      // check if token exists:
-      if (!sToken) {
-        window.location.assign("login.html");
+      //check if token exists:
+      var token = sessionStorage.getItem("sToken");  // getCookieByName(Config.getCookieTokenName());
+      if (!token) {
+          window.location.replace("login.html");
       };
+<<<<<<< HEAD
       loadUserProfileData();
+=======
+      loadUserInformation();
+>>>>>>> parent of 3773301... Login & Session working
     </script>
-    </head>
+  </head>
   <body id="page-top">
     <div id="wrapper">
       <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0" style="width: 167px;">

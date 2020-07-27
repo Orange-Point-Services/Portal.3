@@ -2,6 +2,7 @@
 <html>
 
 <head>
+<<<<<<< HEAD
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
   <title>Profile</title>
@@ -29,6 +30,29 @@
       window.location.assign("login.html");
     };
   </script>
+=======
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Submit New Request</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css?h=be3ee106ada8c36692e11907c6fa01ba">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css?h=2c0fc24b3d3038317dc51c05339856d0">
+    <link rel="stylesheet" href="assets/css/styles.min.css?h=aae875cedbb1a508073f7e192800fafb">
+<!--  DCM Scripts - Inside <head> -->
+    <script src="assets/js/Config.js"></script>
+    <script src="assets/js/profile.js"></script>
+    <script>
+        //check if token exists:
+        var token = getCookieByName(Config.getCookieTokenName());
+        if (!token) {
+            window.location.replace("login.html");
+            };
+    </script>
+>>>>>>> parent of 3773301... Login & Session working
 </head>
 
 <body id="page-top">

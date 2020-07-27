@@ -3,9 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<<<<<<< HEAD:login_bad.html
   <title>Portal Login</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>"
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+=======
+  <meta name="google-signin-client_id" content="207636069241-j59b8rnt1igd8pacv8c8d2vgb4vldfi8.apps.googleusercontent.com">
+  <title>Login</title>
+>>>>>>> parent of 8da5e44... newRequest form formating fixed:login.html
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css?h=be3ee106ada8c36692e11907c6fa01ba">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
   <link rel="stylesheet" href="assets/fontawesome-free/css/all.css">
@@ -14,6 +19,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css">
   <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css?h=2c0fc24b3d3038317dc51c05339856d0">
   <link rel="stylesheet" href="assets/css/styles.min.css?h=aae875cedbb1a508073f7e192800fafb">
+<<<<<<< HEAD:login_bad.html
   <!--  DCM Scripts - Inside <head> -->
   <script src="assets/ECX/config.js"></script>
   <script src="assets/ECX/custCode.js"></script>
@@ -21,6 +27,12 @@
   <!--  DCM Scripts - Inside <head> -->
   <script src="assets/ECX/config.js"></script>
   <script src="assets/ECX/custCode.js"></script>
+=======
+<!--  DCM Scripts - Inside <head> -->
+  <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/custCode.js"></script>
+>>>>>>> parent of 8da5e44... newRequest form formating fixed:login.html
   <script>
     var sToken = sessionStorage.getItem("sToken");
 //    alert("sToken: " + sToken);
@@ -62,7 +74,7 @@
                                             </div>
                                         </div>
                                         <!-- Start: Login -->
-                                        <button class="btn btn-primary btn-block text-white btn-user" type="submit" id="btnLogin" onclick=" onSignInAction();">Login</button>
+                                        <button class="btn btn-primary btn-block text-white btn-user" type="submit" id="btnLogin">Login</button>
                                         <!-- End: Login -->
                                         <hr>
                                         <a class="btn btn-primary btn-block text-white btn-google btn-user" role="btnGoogle" onclick="onSignInAction();">
@@ -86,10 +98,25 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
     <!--script src="assets/js/script.min.js?h=4cbf5b825cfb8d41a431350df90680c7"></script-->
     <script>
+<<<<<<< HEAD:login_bad.html
       var vSite  = Config.siteUrl;
       var vDomain = Config.getRuntimeDomain();
       $('#txtSiteURL').text('Site: ' + Config.siteUrl);
       $('#txtDomain').text('AppBase Domain: ' + Config.getRuntimeDomain());
+=======
+        var token = sessionStorage.getItem("sToken");  //  getCookieByName(Config.getCookieTokenName());
+        // if (token) {
+        //     alert("Successfuly Login in.");
+        //     window.location.replace("./index.html");
+        // };
+        $("#btnLogin").click(function() {
+            //alert("here we go...");
+            onSignInAction();
+            //check if token exists:
+            alert("Token is: " + token);
+            //window.location.assign("./index.html");
+        });
+>>>>>>> parent of 8da5e44... newRequest form formating fixed:login.html
     </script>
   </body>
 </html>

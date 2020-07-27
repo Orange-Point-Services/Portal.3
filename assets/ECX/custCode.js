@@ -7,48 +7,49 @@ String.format = function() {
     return s;
 };
 
-function onSignInAction() {
-    var login    = $('#inputEmail').val(),
-        password = $('#inputPassword').val();
-    
-    if (!login || !password) {
-        alert("Please insert login AND password");
-        return;
-    }
-    sessionStorage.setItem("sLogin", login);
-    var url = String.format('{0}Security.WebService/AuthenticationServiceRest.svc/login.post', Config.siteUrl);
+function onSignIn() {
+  var login    = $('#inputEmail').val(),
+      password = $('#inputPassword').val();
 
-    $.ajax({
-      url: url,
-      type: 'POST',
-      data: {
-          u: login,
-          p: password
-      },
-      success: function(token) {
-        sessionStorage.setItem("sToken", token);
-          swal({
-                  title: 'Success',
-                  text: 'You have successfully logged in',
-                  timer: 1000,
-                  type: 'success',
-                  showConfirmButton: false
-              },
-              function() {
-                  location.reload();
-              });
-      },
-      error: function(xhr, error) {
-        sessionStorage.setItem("sToken", "error");
-          swal({
-              title: 'Warning',
-              text: 'Invalid User or Password',
-              type: 'warning'
-          });
-      }
+  if (!login || !password) {
+    alert("Please Insert Login AND Password");
+    return;
+  }
+  sessionStorage.setItem("sLogin", login);
+
+  var url = Config.siteUrl + "/Security.WebService/AuthenticationServiceRest.svc/login.post";
+
+  $.ajax({
+    url: url,
+    type: 'POST',
+    data: {
+        u: login,
+        p: password
+    },
+    success: function(response, status, xhr) {
+      sessionStorage.setItem("sToken", response);
+      swal({
+          title : 'Success',
+          text  : 'You have successfully logged in',
+          timer : 1000,
+          icon  : 'success',
+          button: false
+      });
+      window.location.assign("index.html");
+    },
+    error: function(xhr) {
+      swal({
+          title : 'Warning',
+          text  : 'Invalid User or Password - ' + xhr.errMsg,
+          icon  : 'success',
+          timer : 5000,
+          button: true
+      });
+    }
   });
-//    return false;
+  return false;
 }
+
 // Load Summary Info (index.html)
 function loadSummaryInfo() {
   var url = String.format('{0}BDS.WebService/DataServiceRest.svc/post/{1}/ROOT_CUST_PRTL_GETUSERINFO', Config.siteUrl, Config.appBaseDomain);

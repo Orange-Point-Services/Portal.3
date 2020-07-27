@@ -7,7 +7,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
   <meta name="google-signin-client_id" content="207636069241-j59b8rnt1igd8pacv8c8d2vgb4vldfi8.apps.googleusercontent.com">
-  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css?h=be3ee106ada8c36692e11907c6fa01ba">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
   <link rel="stylesheet" href="assets/fontawesome-free/css/all.css">
   <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
@@ -22,7 +22,7 @@
   <script>
     var sToken = sessionStorage.getItem("sToken");
     if (sToken) {
-    window.location.assign("index.html");
+      window.location.assign("index.html");
     };
   </script>
 </head>
@@ -58,10 +58,11 @@
                                             </div>
                                         </div>
                                         <!-- Start: Login -->
-                                        <button class="btn btn-primary btn-block text-white btn-user" type="submit" id="btnLogin" onclick="onSignInAction();">Login</button>
+                                        <a class="btn btn-primary btn-block text-white btn-user btn-user" role="btnLogin" onclick="onSignIn();">
+                                          <i class="fab font-awesome"></i>Login In</a>
                                         <!-- End: Login -->
                                         <hr>
-                                        <a class="btn btn-primary btn-block text-white btn-google btn-user" role="btnGoogle" onclick="onSignInAction();">
+                                        <a class="btn btn-primary btn-block text-white btn-google btn-user" role="btnGoogle" onclick="onSignIn();">
                                           <i class="fab fa-google"></i>Login with Google</a>
                                         <hr>
                                         <!--div class="g-signin2" data-onsuccess="onSignIn"></div-->
@@ -76,11 +77,9 @@
             </div>
         </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
-    <!--script src="assets/js/script.min.js?h=4cbf5b825cfb8d41a431350df90680c7"></script-->
     <script>
       $('#txtSiteURL').text('Site: ' + Config.siteUrl);
       $('#txtDomain').text('AppBase Domain: ' + Config.getRuntimeDomain());

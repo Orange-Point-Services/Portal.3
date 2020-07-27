@@ -7,21 +7,6 @@ String.format = function() {
     return s;
 };
 
-/* Calls when token expires */
-function setTokenExpires() {
-    authControl('noauth');
-    swal({
-        title: 'Warning',
-        text: 'Set Token Expired. You are not authorized for this action',
-        type: 'warning'
-    });
-}
-
-function logOutAction() {
-    removeTokenFromCookie();
-    window.location.assign("./login.html");    
-}
-
 function onSignInAction() {
     var login    = $('#inputEmail').val(),
         password = $('#inputPassword').val();
@@ -41,8 +26,6 @@ function onSignInAction() {
         },
         success: function(token) {
             //alert("Sucessfull login...");
-            saveTokenIntoCookie(token);
-            saveLoginIntoCookie(login);
             sessionStorage.setItem("sToken", token);
             loadUserCases(122);
             window.location.replace("./index.html");

@@ -40,7 +40,7 @@ function onSignInAction() {
             p: password
         },
         success: function(token) {
-            //alert("Sucessfull login...");
+            alert("Sucessfull login...");
             saveTokenIntoCookie(token);
             saveLoginIntoCookie(login);
             sessionStorage.setItem("sToken", token);
@@ -158,10 +158,10 @@ function getCorrectJSON(response) {
 
 function saveLoginIntoCookie(login) {
     var dtNow = new Date(),
-        time  = dtNow.getTime() + 3600 * 1000; // plus 1 hour
+        time = dtNow.getTime() + 3600 * 1000; // plus 1 hour
+
     dtNow.setTime(time);
 
-    sessionStorage.setItem("sLogin", login);
     // create cookies
     document.cookie = Config.getCookieLoginName() + '=' + login + '; expires=' + dtNow.toUTCString() + ';';
 }
@@ -169,8 +169,9 @@ function saveLoginIntoCookie(login) {
 function saveTokenIntoCookie(token) {
     var dtNow = new Date(),
         time = dtNow.getTime() + 3600 * 1000; // plus 1 hour
+
     dtNow.setTime(time);
-    sessionStorage.setItem("sToken", token);
+
     // create cookies
     document.cookie = Config.getCookieTokenName() + '=' + token + '; expires=' + dtNow.toUTCString() + ';';
 }

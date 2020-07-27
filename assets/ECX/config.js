@@ -16,7 +16,7 @@ var Config = {
     getCookieTokenName: function() {
         return this.appBaseDomain + '_appbaseusertoken'
     },
-//
+
     getCookieLoginName: function() {
         return this.appBaseDomain + '_appbaseuserlogin'
     },
@@ -25,15 +25,15 @@ var Config = {
         return 'app=CaseDetailRuntime&group=FOM&usePageConfig=1&appid=root_CaseManagement';
         //return 'app=PortalCaseDetailRuntime&group=FOM&usePageConfig=1&appid=root_Portal';
     },
-//
+
     getCMSServiceRestUrl: function(uri) {
         return this.siteUrl + 'CMS.WebService/CMSServiceRest.svc/' + uri;
     },
-//
+
     getRuntimeDomain: function() {
         return this.appBaseDomain;
     },
-//
+
     getFileNameToUpload: function(fname) {
         if (fname) {
             var now = new Date(),
@@ -43,7 +43,7 @@ var Config = {
             return encodeURIComponent(fname.replace(reg, '$1_' + date + '$2'));
         }
     },
-//
+
     getFileNameUploaded: function(url) {
         return url.substring(url.length - url.split("").reverse().join("").indexOf("/"), url.length);
     }

@@ -1,26 +1,19 @@
 var Config = {
-    fakeUpload: false,
     cmsRootPath: '',
-    //site url  https://trydcm.eccentex.com/Ecx.Web?appid=ROOT_CASEMANAGEMENT&d=DCM_TRAINING_PRODUCTION.TENANT82
+    // demo site : https://demos.eccentex.com/BDS.WebService/DataServiceRest.svc/post/DCM_Playground_Production.tenant1/root_DCM_SearchCasesACAll
+    // site url  https://trydcm.eccentex.com/Ecx.Web?appid=ROOT_CASEMANAGEMENT&d=DCM_TRAINING_PRODUCTION.TENANT82
     siteUrl:   'https://trydcm.eccentex.com/',
-    //from url d={#}
+    // from url d={#}
     appBaseDomain: 'DCM_PRODUCTION.TENANT82',
-    //Config.TOKEN_SYSTEMDOMAIN
+    // Config.TOKEN_SYSTEMDOMAIN
     appBaseTokenSystemDomain: 'config.tenant82',
 //  Rules
     caseCreateRule     : 'root_MDM_CreateCaseWithDataFn',
     caseGetTypesRule   : 'root_STP_getCaseTypes',
     caseSearchRule     : 'root_DCM_SearchCases',
-    ExtPartySearchRule : 'ROOT_CUST_GETEXTPARTYDATA',
+    extPartySearchRule : 'ROOT_CUST_GETEXTPARTYDATA',
 //  Functions 
-    getCookieTokenName: function() {
-        return this.appBaseDomain + '_appbaseusertoken'
-    },
-
-    getCookieLoginName: function() {
-        return this.appBaseDomain + '_appbaseuserlogin'
-    },
-    // This function returns params for open case detail page
+//  This function returns params for open case detail page
     getCaseDetailPageParams: function() {
         return 'app=CaseDetailRuntime&group=FOM&usePageConfig=1&appid=root_CaseManagement';
         //return 'app=PortalCaseDetailRuntime&group=FOM&usePageConfig=1&appid=root_Portal';
@@ -28,10 +21,6 @@ var Config = {
 
     getCMSServiceRestUrl: function(uri) {
         return this.siteUrl + 'CMS.WebService/CMSServiceRest.svc/' + uri;
-    },
-
-    getRuntimeDomain: function() {
-        return this.appBaseDomain;
     },
 
     getFileNameToUpload: function(fname) {

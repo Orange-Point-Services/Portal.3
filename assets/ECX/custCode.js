@@ -70,7 +70,7 @@ function loadSummaryInfo() {
     success: function(response) {
       response = getCorrectJSON(response);
 // using sample data
-      var jsonResponse = summaryInfo  // JSON.parse(response);
+      var jsonResponse = caseTypeInfo  // JSON.parse(response);
       if (jsonResponse && jsonResponse.ErrorCode === 500) {
           return;
       }

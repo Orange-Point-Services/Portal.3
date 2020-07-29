@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
   <title>Home</title>
+  <div w3-include-html="head_scripts.jhtml"></div>
   <script src="assets/js/jquery.min.js"></script>
   <script src="assets/sweetalert2/sweetalert2.min.js"></script>
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css?h=be3ee106ada8c36692e11907c6fa01ba">
@@ -72,8 +73,9 @@
     <div class="d-flex flex-column" id="content-wrapper">
       <div id="content">
         <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
-          <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop"
-              type="button"><i class="fas fa-bars"></i></button>
+          <div class="container-fluid">
+            <button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
+            <!-- Start: Search bar  -->
             <form class="form-inline d-none d-sm-inline-block mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
               <div class="input-group"><input class="bg-light form-control border-0 small" type="text"
                   placeholder="Search for ...">
@@ -81,6 +83,7 @@
                       class="fas fa-search"></i></button></div>
               </div>
             </form>
+            <!-- End: Search bar  -->
             <ul class="nav navbar-nav flex-nowrap ml-auto">
               <li class="nav-item dropdown show d-sm-none no-arrow"><a class="dropdown-toggle nav-link"
                   data-toggle="dropdown" aria-expanded="true" href="#"><i class="fas fa-search"></i></a>
@@ -95,12 +98,12 @@
                   </form>
                 </div>
               </li>
+               <!-- Alerts -->
               <li class="nav-item dropdown no-arrow mx-1" role="presentation">
-                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown"
-                    aria-expanded="false" href="#"><span class="badge badge-danger badge-counter"
-                      style="font-size: 16px;">3+</span><i class="fas fa-bell fa-fw" style="font-size: 22px;"></i></a>
-                  <div class="dropdown-menu dropdown-menu-right dropdown-list dropdown-menu-right animated--grow-in"
-                    role="menu">
+                <div class="nav-item dropdown no-arrow">
+                  <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><span class="badge badge-danger badge-counter" style="font-size: 16px;">3+</span><i class="fas fa-bell fa-fw" style="font-size: 22px;"></i>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right dropdown-list dropdown-menu-right animated--grow-in" role="menu">
                     <h6 class="dropdown-header">alerts center</h6>
                     <a class="d-flex align-items-center dropdown-item" href="#">
                       <div class="mr-3">
@@ -129,10 +132,12 @@
                   </div>
                 </div>
               </li>
+              <!-- END Alerts -->
+              <!-- Messages -->
               <li class="nav-item dropdown no-arrow mx-1" role="presentation">
-                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown"
-                    aria-expanded="false" href="#"><i class="fas fa-envelope fa-fw" style="font-size: 22px;"></i><span
-                      class="badge badge-danger badge-counter" style="font-size: 16px;">7</span></a>
+                <div class="nav-item dropdown no-arrow">
+                  <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><i class="fas fa-envelope fa-fw" style="font-size: 22px;"></i><span class="badge badge-danger badge-counter" style="font-size: 16px;">7</span>
+                  </a>
                   <div class="dropdown-menu dropdown-menu-right dropdown-list dropdown-menu-right animated--grow-in"
                     role="menu">
                     <h6 class="dropdown-header">alerts center</h6>
@@ -184,8 +189,9 @@
                 <div class="shadow dropdown-list dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
                 </div>
               </li>
+              <!-- END Messages -->
               <div class="d-none d-sm-block topbar-divider"></div>
-              <!-- Start Dropdown: Presentation -->
+              <!-- Start Dropdown: Account -->
               <li class="nav-item dropdown no-arrow" role="presentation">
                 <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#" id="pLogin"><span class="d-none d-lg-inline mr-2 text-gray-600 small">N/A</span><img class="border rounded-circle img-profile" src="assets/img/eccentex%20hat.png?h=6279900a87d137fab84ac2a23167f84a"></a>
                   <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu">
@@ -197,7 +203,7 @@
                   </div>
                 </div>
               </li>
-              <!-- END Dropdown: Presentation -->
+              <!-- END Dropdown: Account -->
             </ul>
           </div>
         </nav>

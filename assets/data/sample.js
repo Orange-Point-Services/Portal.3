@@ -21,33 +21,38 @@ var userInfo = {
   }
 }
 
-var summaryInfo = {
-  "DATA": {
-    "ROOT_CUST_PRTL_SUMMARYINFO": {
-      "ITEMS": [
-        {
-          "CASETYPE1_NAME": "General Inquiry",
-          "CASETYPE2_NAME": "Payment Request",
-          "CASETYPE3_NAME": "Auto Loan",
-          "CASETYPE4_NAME": "Work Order",
-          "CASETYPE1": 80,
-          "CASETYPE2": 60,
-          "CASETYPE3": 40,
-          "CASETYPE4": 20,
-          "CRITICAL": 10,
-          "MAYOR": 30,
-          "NORMAL": 100,
-          "TRIVIAL": 40,
-          "MINOR": 20,
-          "CRITICAL_PCT": 5,
-          "MAYOR_PCT": 15,
-          "NORMAL_PCT": 50,
-          "TRIVIAL_PCT": 20,
-          "MINOR_PCT": 10
-        }
-      ],
-      "VALIDATION": null,
-      "IsValid": true
+var caseTypeInfo = {
+  "DATA":
+  {"ROOT_CUST_PRTL_GETTOTALBYCASETYPE":{"ITEMS":[{"CASETYPE_NAME":"General Inquiry","CASETYPE_TOTAL":6},{"CASETYPE_NAME":"Complaint","CASETYPE_TOTAL":1}],"VALIDATION":null,"IsValid":true}}}
+
+
+  var summaryInfo = {
+    "DATA": {
+      "ROOT_CUST_PRTL_SUMMARYINFO": {
+        "ITEMS": [
+          {
+            "CASETYPE1_NAME": "General Inquiry",
+            "CASETYPE2_NAME": "Payment Request",
+            "CASETYPE3_NAME": "Auto Loan",
+            "CASETYPE4_NAME": "Work Order",
+            "CASETYPE1": 80,
+            "CASETYPE2": 60,
+            "CASETYPE3": 40,
+            "CASETYPE4": 20,
+            "CRITICAL": 10,
+            "MAYOR": 30,
+            "NORMAL": 100,
+            "TRIVIAL": 40,
+            "MINOR": 20,
+            "CRITICAL_PCT": 5,
+            "MAYOR_PCT": 15,
+            "NORMAL_PCT": 50,
+            "TRIVIAL_PCT": 20,
+            "MINOR_PCT": 10
+          }
+        ],
+        "VALIDATION": null,
+        "IsValid": true
+      }
     }
   }
-}

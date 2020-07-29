@@ -31,14 +31,6 @@ var caseTypeInfo = {
       "ROOT_CUST_PRTL_SUMMARYINFO": {
         "ITEMS": [
           {
-            "CASETYPE1_NAME": "General Inquiry",
-            "CASETYPE2_NAME": "Payment Request",
-            "CASETYPE3_NAME": "Auto Loan",
-            "CASETYPE4_NAME": "Work Order",
-            "CASETYPE1": 80,
-            "CASETYPE2": 60,
-            "CASETYPE3": 40,
-            "CASETYPE4": 20,
             "CRITICAL": 10,
             "MAYOR": 30,
             "NORMAL": 100,

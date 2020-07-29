@@ -50,8 +50,63 @@ function onSignIn() {
   return false;
 }
 
-// Load Summary Info (index.html)
-function loadSummaryInfo() {
+// Top 4 Case Types Info (index.html)
+function loadTopCaseTypesInfo() {
+  var url     = String.format('{0}BDS.WebService/DataServiceRest.svc/post/{1}/ROOT_CUST_PRTL_GETTOTALBYCASETYPE', Config.siteUrl, Config.appBaseDomain);
+  var vLogin  = sessionStorage.getItem("sLogin");  //     getCookieByName(Config.getCookieLoginName());
+  var vToken  = sessionStorage.getItem("sToken");  //     getCookieByName(Config.getCookieTokenName());
+
+  if (vToken) {
+      url += '?t=' + vToken;
+  } else {
+      return;
+  }
+
+  // {"DATA":{"ROOT_CUST_PRTL_GETTOTALBYCASETYPE":{"ITEMS":[{"CASETYPE_NAME":"General Inquiry","CASETYPE_TOTAL":6},{"CASETYPE_NAME":"Complaint","CASETYPE_TOTAL":1}],"VALIDATION":null,"IsValid":true}}}
+  $.ajax({
+    dataType: 'text',
+    url: url,
+    type: 'POST',
+    data: { login: vLogin },
+    success: function(response) {
+      response = getCorrectJSON(response);
+// using sample data
+      var jsonResponse = caseTypeInfo  // JSON.parse(response);
+      if (jsonResponse && jsonResponse.ErrorCode === 500) {
+          return;
+      }
+      var data        = jsonResponse.DATA['ROOT_CUST_PRTL_GETTOTALBYCASETYPE'],
+          respSuccess = '';
+      if (data) {
+        respSuccess = data.ITEMS[0];
+        var vCaseType1       = respSuccess.CASETYPE_TOTAL;
+        var vCaseTypeName1   = respSuccess.CASETYPE_NAME;
+        $("#cbCaseType1").html("<div class=\"text-uppercase text-primary font-weight-bold text-xs mb-1\">"+vCaseTypeName1+"</div><div class=\"text-dark font-weight-bold h5 mb-0\">"+vCaseType1+"</div>");
+        respSuccess = data.ITEMS[1];
+        var vCaseType2       = respSuccess.CASETYPE_TOTAL;
+        var vCaseTypeName2   = respSuccess.CASETYPE_NAME;
+        $("#cbCaseType2").html("<div class=\"text-uppercase text-primary font-weight-bold text-xs mb-1\">"+vCaseTypeName2+"</div><div class=\"text-dark font-weight-bold h5 mb-0\">"+vCaseType2+"</div>");
+        respSuccess = data.ITEMS[2];
+        var vCaseType3       = respSuccess.CASETYPE_TOTAL;
+        var vCaseTypeName3   = respSuccess.CASETYPE_NAME;
+        $("#cbCaseType3").html("<div class=\"text-uppercase text-primary font-weight-bold text-xs mb-1\">"+vCaseTypeName3+"</div><div class=\"text-dark font-weight-bold h5 mb-0\">"+vCaseType3+"</div>");
+        respSuccess = data.ITEMS[3];
+        var vCaseType4       = respSuccess.CASETYPE_TOTAL;
+        var vCaseTypeName4   = respSuccess.CASETYPE_NAME;
+        $("#cbCaseType4").html("<div class=\"text-uppercase text-primary font-weight-bold text-xs mb-1\">"+vCaseTypeName4+"</div><div class=\"text-dark font-weight-bold h5 mb-0\">"+vCaseType4+"</div>");
+      }
+    },
+    error: function() {
+      swal({
+        title: 'Warning',
+        text: 'Error Loading User Profile Data. Please contact your Administrator',
+        type: 'warning'
+      });
+    }
+  });
+}
+// Case Distribution by Priority (index.html)
+function loadCaseDistribInfo() {
   var url = String.format('{0}BDS.WebService/DataServiceRest.svc/post/{1}/ROOT_CUST_PRTL_GETUSERINFO', Config.siteUrl, Config.appBaseDomain);
   var vLogin       = sessionStorage.getItem("sLogin");  //     getCookieByName(Config.getCookieLoginName());
   var vToken       = sessionStorage.getItem("sToken");  //     getCookieByName(Config.getCookieTokenName());
@@ -74,22 +129,24 @@ function loadSummaryInfo() {
       if (jsonResponse && jsonResponse.ErrorCode === 500) {
           return;
       }
-      var data        = jsonResponse.DATA['ROOT_CUST_PRTL_SUMMARYINFO'],
+      var data        = jsonResponse.DATA['ROOT_CUST_PRTL_GETTOTALBYCASETYPE'],
           respSuccess = '';
       if (data) {
         respSuccess = data.ITEMS[0];
-//
-        var vCaseType1       = respSuccess.CASETYPE1;
-        var vCaseTypeName1   = respSuccess.CASETYPE1_NAME;
+        var vCaseType1       = respSuccess.CASETYPE_TOTAL;
+        var vCaseTypeName1   = respSuccess.CASETYPE_NAME;
         $("#cbCaseType1").html("<div class=\"text-uppercase text-primary font-weight-bold text-xs mb-1\">"+vCaseTypeName1+"</div><div class=\"text-dark font-weight-bold h5 mb-0\">"+vCaseType1+"</div>");
-        var vCaseType2       = respSuccess.CASETYPE2;
-        var vCaseTypeName2   = respSuccess.CASETYPE2_NAME;
+        respSuccess = data.ITEMS[1];
+        var vCaseType2       = respSuccess.CASETYPE_TOTAL;
+        var vCaseTypeName2   = respSuccess.CASETYPE_NAME;
         $("#cbCaseType2").html("<div class=\"text-uppercase text-primary font-weight-bold text-xs mb-1\">"+vCaseTypeName2+"</div><div class=\"text-dark font-weight-bold h5 mb-0\">"+vCaseType2+"</div>");
-        var vCaseType3       = respSuccess.CASETYPE3;
-        var vCaseTypeName3   = respSuccess.CASETYPE3_NAME;
+        respSuccess = data.ITEMS[2];
+        var vCaseType3       = respSuccess.CASETYPE_TOTAL;
+        var vCaseTypeName3   = respSuccess.CASETYPE_NAME;
         $("#cbCaseType3").html("<div class=\"text-uppercase text-primary font-weight-bold text-xs mb-1\">"+vCaseTypeName3+"</div><div class=\"text-dark font-weight-bold h5 mb-0\">"+vCaseType3+"</div>");
-        var vCaseType4       = respSuccess.CASETYPE4;
-        var vCaseTypeName4   = respSuccess.CASETYPE4_NAME;
+        respSuccess = data.ITEMS[3];
+        var vCaseType4       = respSuccess.CASETYPE_TOTAL;
+        var vCaseTypeName4   = respSuccess.CASETYPE_NAME;
         $("#cbCaseType4").html("<div class=\"text-uppercase text-primary font-weight-bold text-xs mb-1\">"+vCaseTypeName4+"</div><div class=\"text-dark font-weight-bold h5 mb-0\">"+vCaseType4+"</div>");
 //
         var vCritical    = respSuccess.CRITICAL;

@@ -106,7 +106,7 @@ function loadTopCaseTypesInfo() {
   });
 }
 // Case Distribution by Priority (index.html)
-function loadCaseDistribInfo() {
+function loadPriotityDistribution() {
   var url = String.format('{0}BDS.WebService/DataServiceRest.svc/post/{1}/ROOT_CUST_PRTL_GETUSERINFO', Config.siteUrl, Config.appBaseDomain);
   var vLogin       = sessionStorage.getItem("sLogin");  //     getCookieByName(Config.getCookieLoginName());
   var vToken       = sessionStorage.getItem("sToken");  //     getCookieByName(Config.getCookieTokenName());
@@ -116,7 +116,8 @@ function loadCaseDistribInfo() {
   } else {
       return;
   }
-  //{"DATA":{"ROOT_CUST_PRTL_SUMMARYINFO":{"ITEMS":[{"CASETYPE1":15,"CASETYPE2":5,"CASETYPE3":50,"CASETYPE4":20,"CRITICAL":20,"MAYOR":40,"NORMAL":120,"TRIVIAL":20,"MINOR":0,"CRITICAL_PCT":10,"MAYOR_PCT":20,"NORMAL_PCT":60,"TRIVIAL_PCT":20,"MINOR_PCT":0}],"VALIDATION":null,"IsValid":true}}}
+
+  //     {"ROOT_CUST_PRTL_PRIOTITYDISTRIBUTION":{"ITEMS":[{"P_NAME":"Major","TOTAL":6},{"P_NAME":"Normal","TOTAL":1},{"P_NAME":"TOTAL","TOTAL":7}],"VALIDATION":null,"IsValid":true}}}
   $.ajax({
     dataType: 'text',
     url: url,
@@ -125,50 +126,43 @@ function loadCaseDistribInfo() {
     success: function(response) {
       response = getCorrectJSON(response);
 // using sample data
-      var jsonResponse = caseTypeInfo  // JSON.parse(response);
+      var jsonResponse = priotityDistribution  // JSON.parse(response);
       if (jsonResponse && jsonResponse.ErrorCode === 500) {
           return;
       }
-      var data        = jsonResponse.DATA['ROOT_CUST_PRTL_GETTOTALBYCASETYPE'],
+      var data        = jsonResponse.DATA['ROOT_CUST_PRTL_PRIOTITYDISTRIBUTION'],
           respSuccess = '';
       if (data) {
         respSuccess = data.ITEMS[0];
-        var vCaseType1       = respSuccess.CASETYPE_TOTAL;
-        var vCaseTypeName1   = respSuccess.CASETYPE_NAME;
-        $("#cbCaseType1").html("<div class=\"text-uppercase text-primary font-weight-bold text-xs mb-1\">"+vCaseTypeName1+"</div><div class=\"text-dark font-weight-bold h5 mb-0\">"+vCaseType1+"</div>");
+        var vTotal = respSuccess.TOTAL;
+        var vName  = respSuccess.P_NAME;
+        var vPct   = respSuccess.TOTAL.value/20;
+        $("#pbCritical").html(vName + "<span class=\"float-right\">"+vTotal+"</span>");
+        $("#pbCriticalPct").html("<div class=\"progress-bar bg-danger\" aria-valuenow=\"0\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: "+vPct+"%;\">"+vPct+"%</div>");
         respSuccess = data.ITEMS[1];
-        var vCaseType2       = respSuccess.CASETYPE_TOTAL;
-        var vCaseTypeName2   = respSuccess.CASETYPE_NAME;
-        $("#cbCaseType2").html("<div class=\"text-uppercase text-primary font-weight-bold text-xs mb-1\">"+vCaseTypeName2+"</div><div class=\"text-dark font-weight-bold h5 mb-0\">"+vCaseType2+"</div>");
+        var vTotal = respSuccess.TOTAL;
+        var vName  = respSuccess.P_NAME;
+        var vPct   = respSuccess.TOTAL.value/20;
+        $("#pbMayor").html(vName + "<span class=\"float-right\">"+vTotal+"</span>");
+        $("#pbMayorPct").html("<div class=\"progress-bar bg-warning\" aria-valuenow=\"0\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: "+vPct+"%;\">"+vPct+"%</div>");
         respSuccess = data.ITEMS[2];
-        var vCaseType3       = respSuccess.CASETYPE_TOTAL;
-        var vCaseTypeName3   = respSuccess.CASETYPE_NAME;
-        $("#cbCaseType3").html("<div class=\"text-uppercase text-primary font-weight-bold text-xs mb-1\">"+vCaseTypeName3+"</div><div class=\"text-dark font-weight-bold h5 mb-0\">"+vCaseType3+"</div>");
+        var vTotal = respSuccess.TOTAL;
+        var vName  = respSuccess.P_NAME;
+        var vPct   = respSuccess.TOTAL.value/20;
+        $("#pbNormal").html(vName + "<span class=\"float-right\">"+vTotal+"</span>");
+        $("#pbNormalPct").html("<div class=\"progress-bar bg-info\" aria-valuenow=\"0\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: "+vPct+"%;\">"+vPct+"%</div>");
         respSuccess = data.ITEMS[3];
-        var vCaseType4       = respSuccess.CASETYPE_TOTAL;
-        var vCaseTypeName4   = respSuccess.CASETYPE_NAME;
-        $("#cbCaseType4").html("<div class=\"text-uppercase text-primary font-weight-bold text-xs mb-1\">"+vCaseTypeName4+"</div><div class=\"text-dark font-weight-bold h5 mb-0\">"+vCaseType4+"</div>");
-//
-        var vCritical    = respSuccess.CRITICAL;
-        var vCriticalPct = respSuccess.CRITICAL_PCT;
-        $("#pbCritical").html("Critical<span class=\"float-right\">"+vCritical+"</span>");
-        $("#pbCriticalPct").html("<div class=\"progress-bar bg-danger\" aria-valuenow=\"0\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: "+vCriticalPct+"%;\">"+vCriticalPct+"%</div>");
-        var vMayor    = respSuccess.MAYOR;
-        var vMayorPct = respSuccess.MAYOR_PCT;
-        $("#pbMayor").html("Mayor<span class=\"float-right\">"+vMayor+"</span>");
-        $("#pbMayorPct").html("<div class=\"progress-bar bg-warning\" aria-valuenow=\"0\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: "+vMayorPct+"%;\">"+vMayorPct+"%</div>");
-        var vNormal    = respSuccess.NORMAL;
-        var vNormalPct = respSuccess.NORMAL_PCT;
-        $("#pbNormal").html("Normal<span class=\"float-right\">"+vNormal+"</span>");
-        $("#pbNormalPct").html("<div class=\"progress-bar bg-info\" aria-valuenow=\"0\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: "+vNormalPct+"%;\">"+vNormalPct+"%</div>");
-        var vTrivial    = respSuccess.TRIVIAL;
-        var vTrivialPct = respSuccess.TRIVIAL_PCT;
-        $("#pbTrivial").html("Trivial<span class=\"float-right\">"+vTrivial+"</span>");
-        $("#pbTrivialPct").html("<div class=\"progress-bar bg-success\" aria-valuenow=\"0\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: "+vTrivialPct+"%;\">"+vTrivialPct+"%</div>");
-        var vMinor    = respSuccess.MINOR;
-        var vMinorPct = respSuccess.MINOR_PCT;
-        $("#pbMinor").html("Minor<span class=\"float-right\">"+vMinor+"</span>");
-        $("#pbMinorPct").html("<div class=\"progress-bar bg-success\" aria-valuenow=\"0\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: "+vMinorPct+"%;\">"+vMinorPct+"%</div>");
+        var vTotal = respSuccess.TOTAL;
+        var vName  = respSuccess.P_NAME;
+        var vPct   = respSuccess.TOTAL.value/20;
+        $("#pbTrivial").html(vName + "<span class=\"float-right\">"+vTotal+"</span>");
+        $("#pbTrivialPct").html("<div class=\"progress-bar bg-success\" aria-valuenow=\"0\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: "+vPct+"%;\">"+vPct+"%</div>");
+        respSuccess = data.ITEMS[4];
+        var vTotal = respSuccess.TOTAL;
+        var vName  = respSuccess.P_NAME;
+        var vPct   = respSuccess.TOTAL.value/20;
+        $("#pbMinor").html(vName + "<span class=\"float-right\">"+vTotal+"</span>");
+        $("#pbMinorPct").html("<div class=\"progress-bar bg-success\" aria-valuenow=\"0\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: "+vPct+"%;\">"+vPct+"%</div>");
       }
     },
     error: function() {

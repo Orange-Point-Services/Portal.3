@@ -3,11 +3,11 @@ var Config = {
     // demo site : https://demos.eccentex.com/BDS.WebService/DataServiceRest.svc/post/DCM_Playground_Production.tenant1/root_DCM_SearchCasesACAll
     // site url  https://trydcm.eccentex.com/Ecx.Web?appid=ROOT_CASEMANAGEMENT&d=DCM_TRAINING_PRODUCTION.TENANT82
    //site url  https://sandbox.eccentex.com/Ecx.Web?appid=root_CaseManagement&d=DCM_Production.tenant12&t=
-   siteUrl: 'https://sandbox.eccentex.com/',
+   siteUrl: 'https://trydcm.eccentex.com/',
    // ARIMR (NOT POC) appBaseDomain: 'DCM_PRODUCTION.TENANT12',
-   appBaseDomain: 'DCM2.TENANT12',
+   appBaseDomain: 'DCM_PRODUCTION.TENANT82',
    //Config.TOKEN_SYSTEMDOMAIN
-   appBaseTokenSystemDomain: 'config.tenant12',
+   appBaseTokenSystemDomain: 'config.tenant82',
     // siteUrl:   'https://trydcm.eccentex.com/',
     // // from url d={#}
     // appBaseDomain: 'DCM_PRODUCTION.TENANT82',

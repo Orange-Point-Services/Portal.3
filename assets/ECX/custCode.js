@@ -52,9 +52,9 @@ function onSignIn() {
 
 // Top 4 Case Types Info (index.html)
 function loadTopCaseTypesInfo() {
-  var url     = String.format('{0}BDS.WebService/DataServiceRest.svc/post/{1}/ROOT_CUST_PRTL_GETTOTALBYCASETYPE', Config.siteUrl, Config.appBaseDomain);
-  var vLogin  = sessionStorage.getItem("sLogin");  //     getCookieByName(Config.getCookieLoginName());
-  var vToken  = sessionStorage.getItem("sToken");  //     getCookieByName(Config.getCookieTokenName());
+  var url     = String.format('{0}BDS.WebService/DataServiceRest.svc/post/{1}/root_FOM_getCasesPriority', Config.siteUrl, Config.appBaseDomain);
+  var vLogin  = sessionStorage.getItem("sLogin");
+  var vToken  = sessionStorage.getItem("sToken");
 
   if (vToken) {
       url += '?t=' + vToken;
@@ -62,38 +62,25 @@ function loadTopCaseTypesInfo() {
       return;
   }
 
-  // {"DATA":{"ROOT_CUST_PRTL_GETTOTALBYCASETYPE":{"ITEMS":[{"CASETYPE_NAME":"General Inquiry","CASETYPE_TOTAL":6},{"CASETYPE_NAME":"Complaint","CASETYPE_TOTAL":1}],"VALIDATION":null,"IsValid":true}}}
   $.ajax({
     dataType: 'text',
     url: url,
     type: 'POST',
-    data: { login: vLogin },
+    data: { CODES:"",page:"1",start:"0",limit:"5" },
     success: function(response) {
       response = getCorrectJSON(response);
-// using sample data
-      var jsonResponse = caseTypeInfo  // JSON.parse(response);
+      var jsonResponse = JSON.parse(response);
       if (jsonResponse && jsonResponse.ErrorCode === 500) {
           return;
       }
-      var data        = jsonResponse.DATA['ROOT_CUST_PRTL_GETTOTALBYCASETYPE'],
+      var data        = jsonResponse.DATA['root_FOM_getCasesPriority'],
           respSuccess = '';
+
       if (data) {
-        respSuccess = data.ITEMS[0];
-        var vCaseType1       = respSuccess.CASETYPE_TOTAL;
-        var vCaseTypeName1   = respSuccess.CASETYPE_NAME;
-        $("#cbCaseType1").html("<div class=\"text-uppercase text-primary font-weight-bold text-xs mb-1\">"+vCaseTypeName1+"</div><div class=\"text-dark font-weight-bold h5 mb-0\">"+vCaseType1+"</div>");
-        respSuccess = data.ITEMS[1];
-        var vCaseType2       = respSuccess.CASETYPE_TOTAL;
-        var vCaseTypeName2   = respSuccess.CASETYPE_NAME;
-        $("#cbCaseType2").html("<div class=\"text-uppercase text-primary font-weight-bold text-xs mb-1\">"+vCaseTypeName2+"</div><div class=\"text-dark font-weight-bold h5 mb-0\">"+vCaseType2+"</div>");
-        respSuccess = data.ITEMS[2];
-        var vCaseType3       = respSuccess.CASETYPE_TOTAL;
-        var vCaseTypeName3   = respSuccess.CASETYPE_NAME;
-        $("#cbCaseType3").html("<div class=\"text-uppercase text-primary font-weight-bold text-xs mb-1\">"+vCaseTypeName3+"</div><div class=\"text-dark font-weight-bold h5 mb-0\">"+vCaseType3+"</div>");
-        respSuccess = data.ITEMS[3];
-        var vCaseType4       = respSuccess.CASETYPE_TOTAL;
-        var vCaseTypeName4   = respSuccess.CASETYPE_NAME;
-        $("#cbCaseType4").html("<div class=\"text-uppercase text-primary font-weight-bold text-xs mb-1\">"+vCaseTypeName4+"</div><div class=\"text-dark font-weight-bold h5 mb-0\">"+vCaseType4+"</div>");
+        $.each(data.ITEMS, function(i, item){
+          //alert(item.P_NAME);
+          $("#cbCaseType1").html("<div class=\"text-uppercase text-primary font-weight-bold text-xs mb-1\">"+item.DESCRIPTION+"</div><div class=\"text-dark font-weight-bold h5 mb-0\">"+item.STATISTIC+"</div>");
+        });
       }
     },
     error: function() {
@@ -108,7 +95,7 @@ function loadTopCaseTypesInfo() {
 
 // Case Distribution by Priority (index.html)
 function loadPriotityDistribution() {
-  var url = String.format('{0}BDS.WebService/DataServiceRest.svc/post/{1}/ROOT_CUST_PRTL_GETUSERINFO', Config.siteUrl, Config.appBaseDomain);
+  var url = String.format('{0}BDS.WebService/DataServiceRest.svc/post/{1}/root_FOM_getCasesSummary', Config.siteUrl, Config.appBaseDomain);
   var vLogin       = sessionStorage.getItem("sLogin");
   var vToken       = sessionStorage.getItem("sToken");
   var casesTotal   = 0;
@@ -119,32 +106,31 @@ function loadPriotityDistribution() {
       return;
   }
 
-  //     {"ROOT_CUST_PRTL_PRIOTITYDISTRIBUTION":{"ITEMS":[{"P_NAME":"Major","TOTAL":6},{"P_NAME":"Normal","TOTAL":1},{"P_NAME":"TOTAL","TOTAL":7}],"VALIDATION":null,"IsValid":true}}}
   $.ajax({
     dataType: 'text',
     url: url,
     type: 'POST',
-    data: { login: vLogin },
+    data: { SHOW_EMPTY:1, CODES:"", SHOW_ALL_COUNT:"" },
     success: function(response) {
-      //response = getCorrectJSON(response);
-      //var jsonResponse = JSON.parse(response);
-      // if (jsonResponse && jsonResponse.ErrorCode === 500) {
-      //   return;
-      // }
-    // using sample data
-      var jsonResponse = priotityDistribution;
-      var data = jsonResponse.DATA['ROOT_CUST_PRTL_PRIOTITYDISTRIBUTION'];
+      response = getCorrectJSON(response);
+      var jsonResponse = JSON.parse(response);
+      if (jsonResponse && jsonResponse.ErrorCode === 500) {
+        return;
+      }
+      // using sample data
+      // var jsonResponse = getTasksSummary;
+      var data = jsonResponse.DATA['root_FOM_getCasesSummary'];
 
       $.each(data.ITEMS, function(i, item){
         //alert(item.P_NAME);
-        casesTotal += item.TOTAL;
+        casesTotal += item.STATISTIC;
       });
 
       $.each(data.ITEMS, function(i, item) {
 //        alert(item.P_NAME);
-        $("<h4 class=\"small font-weight-bold\"><span class=\"float-left\">" + item.P_NAME + "</span><span class=\"float-right\">" + item.TOTAL + "</span></h4>\
+        $("<h4 class=\"small font-weight-bold\"><span class=\"float-left\">" + item.DESCRIPTION + "</span><span class=\"float-right\">" + item.STATISTIC + "</span></h4>\
         <div class=\"progress mb-4\">\
-        <div class=\"progress-bar bg-danger\" aria-valuenow=\"0\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: "+ item.TOTAL*100/casesTotal +"%;\">" + (item.TOTAL*100/casesTotal).toFixed(0) + "%</div>").insertAfter("#divProgBar");
+        <div class=\"progress-bar bg-danger\" aria-valuenow=\"0\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: "+ item.STATISTIC*100/casesTotal +"%;\">" + (item.STATISTIC*100/casesTotal).toFixed(0) + "%</div>").insertAfter("#divProgBar");
       });
     },
     error: function() {
@@ -160,8 +146,8 @@ function loadPriotityDistribution() {
 // Load User Profile Data (profile.html)
 function loadUserProfileData() {
   var url = String.format('{0}BDS.WebService/DataServiceRest.svc/post/{1}/ROOT_CUST_PRTL_GETUSERINFO', Config.siteUrl, Config.appBaseDomain);
-  var vLogin       = sessionStorage.getItem("sLogin");  //     getCookieByName(Config.getCookieLoginName());
-  var vToken       = sessionStorage.getItem("sToken");  //     getCookieByName(Config.getCookieTokenName());
+  var vLogin       = sessionStorage.getItem("sLogin");
+  var vToken       = sessionStorage.getItem("sToken");
   $("#iUserName").val(vLogin);
 
   if (vToken) {

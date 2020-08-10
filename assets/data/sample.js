@@ -27,4 +27,4 @@ var caseTypeInfo = {
 
 var priotityDistribution = {
     "DATA":
-    {"ROOT_CUST_PRTL_PRIOTITYDISTRIBUTION":{"ITEMS":[{"P_NAME":"Major","TOTAL":6},{"P_NAME":"Normal","TOTAL":1},{"P_NAME":"TOTAL","TOTAL":7}],"VALIDATION":null,"IsValid":true}}}
+    {"ROOT_CUST_PRTL_PRIOTITYDISTRIBUTION":{"ITEMS":[{"P_NAME":"Normal","TOTAL":1},{"P_NAME":"Major","TOTAL":6}],"VALIDATION":null,"IsValid":true}}}

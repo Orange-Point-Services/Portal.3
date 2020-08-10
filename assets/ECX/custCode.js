@@ -105,11 +105,13 @@ function loadTopCaseTypesInfo() {
     }
   });
 }
+
 // Case Distribution by Priority (index.html)
 function loadPriotityDistribution() {
   var url = String.format('{0}BDS.WebService/DataServiceRest.svc/post/{1}/ROOT_CUST_PRTL_GETUSERINFO', Config.siteUrl, Config.appBaseDomain);
-  var vLogin       = sessionStorage.getItem("sLogin");  //     getCookieByName(Config.getCookieLoginName());
-  var vToken       = sessionStorage.getItem("sToken");  //     getCookieByName(Config.getCookieTokenName());
+  var vLogin       = sessionStorage.getItem("sLogin");
+  var vToken       = sessionStorage.getItem("sToken");
+  var casesTotal   = 0;
 
   if (vToken) {
       url += '?t=' + vToken;
@@ -124,46 +126,26 @@ function loadPriotityDistribution() {
     type: 'POST',
     data: { login: vLogin },
     success: function(response) {
-      response = getCorrectJSON(response);
-// using sample data
-      var jsonResponse = priotityDistribution  // JSON.parse(response);
-      if (jsonResponse && jsonResponse.ErrorCode === 500) {
-          return;
-      }
-      var data        = jsonResponse.DATA['ROOT_CUST_PRTL_PRIOTITYDISTRIBUTION'],
-          respSuccess = '';
-      if (data) {
-        respSuccess = data.ITEMS[0];
-        var vTotal = respSuccess.TOTAL;
-        var vName  = respSuccess.P_NAME;
-        var vPct   = respSuccess.TOTAL.value/20;
-        $("#pbCritical").html(vName + "<span class=\"float-right\">"+vTotal+"</span>");
-        $("#pbCriticalPct").html("<div class=\"progress-bar bg-danger\" aria-valuenow=\"0\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: "+vPct+"%;\">"+vPct+"%</div>");
-        respSuccess = data.ITEMS[1];
-        var vTotal = respSuccess.TOTAL;
-        var vName  = respSuccess.P_NAME;
-        var vPct   = respSuccess.TOTAL.value/20;
-        $("#pbMayor").html(vName + "<span class=\"float-right\">"+vTotal+"</span>");
-        $("#pbMayorPct").html("<div class=\"progress-bar bg-warning\" aria-valuenow=\"0\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: "+vPct+"%;\">"+vPct+"%</div>");
-        respSuccess = data.ITEMS[2];
-        var vTotal = respSuccess.TOTAL;
-        var vName  = respSuccess.P_NAME;
-        var vPct   = respSuccess.TOTAL.value/20;
-        $("#pbNormal").html(vName + "<span class=\"float-right\">"+vTotal+"</span>");
-        $("#pbNormalPct").html("<div class=\"progress-bar bg-info\" aria-valuenow=\"0\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: "+vPct+"%;\">"+vPct+"%</div>");
-        respSuccess = data.ITEMS[3];
-        var vTotal = respSuccess.TOTAL;
-        var vName  = respSuccess.P_NAME;
-        var vPct   = respSuccess.TOTAL.value/20;
-        $("#pbTrivial").html(vName + "<span class=\"float-right\">"+vTotal+"</span>");
-        $("#pbTrivialPct").html("<div class=\"progress-bar bg-success\" aria-valuenow=\"0\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: "+vPct+"%;\">"+vPct+"%</div>");
-        respSuccess = data.ITEMS[4];
-        var vTotal = respSuccess.TOTAL;
-        var vName  = respSuccess.P_NAME;
-        var vPct   = respSuccess.TOTAL.value/20;
-        $("#pbMinor").html(vName + "<span class=\"float-right\">"+vTotal+"</span>");
-        $("#pbMinorPct").html("<div class=\"progress-bar bg-success\" aria-valuenow=\"0\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: "+vPct+"%;\">"+vPct+"%</div>");
-      }
+      //response = getCorrectJSON(response);
+      //var jsonResponse = JSON.parse(response);
+      // if (jsonResponse && jsonResponse.ErrorCode === 500) {
+      //   return;
+      // }
+    // using sample data
+      var jsonResponse = priotityDistribution;
+      var data = jsonResponse.DATA['ROOT_CUST_PRTL_PRIOTITYDISTRIBUTION'];
+
+      $.each(data.ITEMS, function(i, item){
+        //alert(item.P_NAME);
+        casesTotal += item.TOTAL;
+      });
+
+      $.each(data.ITEMS, function(i, item) {
+//        alert(item.P_NAME);
+        $("<h4 class=\"small font-weight-bold\"><span class=\"float-left\">" + item.P_NAME + "</span><span class=\"float-right\">" + item.TOTAL + "</span></h4>\
+        <div class=\"progress mb-4\">\
+        <div class=\"progress-bar bg-danger\" aria-valuenow=\"0\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: "+ item.TOTAL*100/casesTotal +"%;\">" + (item.TOTAL*100/casesTotal).toFixed(0) + "%</div>").insertAfter("#divProgBar");
+      });
     },
     error: function() {
       swal({
@@ -174,6 +156,7 @@ function loadPriotityDistribution() {
     }
   });
 }
+
 // Load User Profile Data (profile.html)
 function loadUserProfileData() {
   var url = String.format('{0}BDS.WebService/DataServiceRest.svc/post/{1}/ROOT_CUST_PRTL_GETUSERINFO', Config.siteUrl, Config.appBaseDomain);

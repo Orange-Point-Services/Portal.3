@@ -145,7 +145,7 @@ function loadPriotityDistribution() {
 
 // Load User Profile Data (profile.html)
 function loadUserProfileData() {
-  var url = String.format('{0}BDS.WebService/DataServiceRest.svc/post/{1}/ROOT_CUST_PRTL_GETUSERINFO', Config.siteUrl, Config.appBaseDomain);
+  var url = String.format('{0}BDS.WebService/DataServiceRest.svc/post/{1}/root_PPL_searchCaseWorkers', Config.siteUrl, Config.appBaseDomain);
   var vLogin       = sessionStorage.getItem("sLogin");
   var vToken       = sessionStorage.getItem("sToken");
   $("#iUserName").val(vLogin);
@@ -155,41 +155,36 @@ function loadUserProfileData() {
   } else {
       return;
   }
-  //{"DATA":{"ROOT_CUST_PRTL_SUMMARYINFO":{"ITEMS":[{"CASETYPE1":15,"CASETYPE2":5,"CASETYPE3":50,"CASETYPE4":20,"CRITICAL":20,"MAYOR":40,"NORMAL":120,"TRIVIAL":20,"MINOR":0,"CRITICAL_PCT":10,"MAYOR_PCT":20,"NORMAL_PCT":60,"TRIVIAL_PCT":20,"MINOR_PCT":0}],"VALIDATION":null,"IsValid":true}}}
+  // {"ID":1,"USERID":18263,"EXTERNALID":null,"ISDELETED":0,"NAME":"APAC ADMIN","CODE":"CASEWORKER_18263","LOGINTYPE":"DB","FIRSTNAME":"APAC","LASTNAME":"ADMIN","USERLOGIN":"apac","PHOTO":null,"EMAIL":"tsherman@eccentex.com","SKILLS":null,"TEAMS":null,"B_ROLES":null,"STATUS":0,"ISLOCKEDOUT":0,"ISACTIVE":1,"TITLE":null,"CITY":"Culver City","STATE":"CA","PHONE":"9492359009","CELLPHONE":null,"BIRTHDAY":null,"FAX":null,"COUNTRY":227,"STREET":"6101 W Centinela Ave, Suite 110","ZIP":"90230","LOCALE":"en-US","LANGUAGE":"en","TIMEZONE":64,"ACCODE":"8245F1455778B5C6E0536164A8C059EA","SECURITYROLES":"F3C1C392-8A00-48CA-82A6-EC635B9A2A9B|||ROOT_PORTALREP|||ROOT_LTR_ROOT|||ROOT_FTSQ_ROOT|||ROOT_CASEWORKER|||ROOT_ADMINISTRATOR","SECURITYGROUPS":null,"SECURITYROLES_WOUT_GROUPS":"ROOT_ADMINISTRATOR|||ROOT_FTSQ_ROOT|||ROOT_LTR_ROOT|||ROOT_PORTALREP|||ROOT_CASEWORKER","WORKBASKET_ID":2,"RN":1}
+
   $.ajax({
     dataType: 'text',
     url: url,
     type: 'POST',
-    data: { login: vLogin },
+    data: { CurrentUser: true },
     success: function(response) {
       response = getCorrectJSON(response);
 // using sample data
-      var jsonResponse = userInfo  // JSON.parse(response);
+      //var jsonResponse = userInfo;
+      var jsonResponse = JSON.parse(response);
       if (jsonResponse && jsonResponse.ErrorCode === 500) {
           return;
       }
-      var data        = jsonResponse.DATA['ROOT_CUST_PRTL_GETUSERINFO'],
+      var data        = jsonResponse.DATA['root_PPL_searchCaseWorkers'],
           respSuccess = '';
       if (data) {
         respSuccess = data.ITEMS[0];
-        console.log("lastLogin= " + respSuccess.USR_LASTLOGINDATE);
-        var vFirstName = respSuccess.USR_FIRSTNAME;
-        var vLastName  = respSuccess.USR_LASTNAME;
-        var vEMail     = respSuccess.USR_EMAIL;
-        var vPhone     = respSuccess.USR_PHONE;
-        var vFullName  = respSuccess.USR_NAME;
-
         $("#iUserName").val(vLogin);
-        $("#iBarFullName").html("<span class=\"d-none d-lg-inline mr-2 text-gray-600 small\">"+ vFullName +"</span><img class=\"border rounded-circle img-profile\" src=\"assets/img/eccentex%20hat.png?h=6279900a87d137fab84ac2a23167f84a\">");
-        $("#iFirstName").val(vFirstName);
-        $("#iLastName").val(vLastName);
+        $("#iBarFullName").html("<span class=\"d-none d-lg-inline mr-2 text-gray-600 small\">"+ respSuccess.NAME +"</span><img class=\"border rounded-circle img-profile\" src=\"assets/img/eccentex%20hat.png?h=6279900a87d137fab84ac2a23167f84a\">");
+        $("#iFirstName").val(respSuccess.FIRSTNAME);
+        $("#iLastName").val(respSuccess.LASTNAME);
 //
         //$("#lastLogin").text(respSuccess.USR_LASTLOGINDATE);
-        $("#iEMail").val(vEMail);
-        $("#iPhone").val(vPhone)
-        $("#iAddress").val(respSuccess.EP_ADDRESS);
-        $("#iCity").val(respSuccess.EP_CITY);
-        $("#iState").val(respSuccess.EP_STATE);
+        $("#iEMail").val(respSuccess.EMAIL);
+        $("#iPhone").val(respSuccess.PHONE)
+        $("#iAddress").val(respSuccess.STREET);
+        $("#iCity").val(respSuccess.CITY);
+        $("#iState").val(respSuccess.STATE);
       }
     },
     error: function() {

@@ -17,21 +17,23 @@ function onSignIn() {
   }
   sessionStorage.setItem("sLogin", login);
 
-  var url = Config.siteUrl + "/Security.WebService/AuthenticationServiceRest.svc/login.post";
+  var url = Config.siteUrl + "/Security.WebService/AuthenticationServiceRest.svc/login";
+//  var url = Config.siteUrl + "/Security.WebService/AuthenticationServiceRest.svc/login.post";
 
   $.ajax({
     url: url,
     type: 'POST',
-    data: {
-        u: login,
-        p: password
-    },
+    data : JSON.stringify({"Username":"david","Password":"123456"}),
+    // data: {
+    //     u: login,
+    //     p: password
+    // },
     success: function(response, status, xhr) {
       sessionStorage.setItem("sToken", response);
       swal({
           title : 'Success',
           text  : 'You have successfully logged in',
-          timer : 1000,
+          timer : 5000,
           icon  : 'success',
           button: false
       });

@@ -23,7 +23,7 @@ function onSignIn() {
   $.ajax({
     url: url,
     type: 'POST',
-    data : JSON.stringify({"Username":"david","Password":"123456"}),
+    data : JSON.stringify({ "Username": login, "Password":password }),
     // data: {
     //     u: login,
     //     p: password
@@ -55,7 +55,6 @@ function onSignIn() {
 // Top 4 Case Types Info (index.html)
 function loadTopCaseTypesInfo() {
   var url     = String.format('{0}BDS.WebService/DataServiceRest.svc/post/{1}/root_FOM_getCasesPriority', Config.siteUrl, Config.appBaseDomain);
-  var vLogin  = sessionStorage.getItem("sLogin");
   var vToken  = sessionStorage.getItem("sToken");
 
   if (vToken) {
@@ -75,9 +74,7 @@ function loadTopCaseTypesInfo() {
       if (jsonResponse && jsonResponse.ErrorCode === 500) {
           return;
       }
-      var data        = jsonResponse.DATA['root_FOM_getCasesPriority'],
-          respSuccess = '';
-
+      var data = jsonResponse.DATA['root_FOM_getCasesPriority'];
       if (data) {
         $.each(data.ITEMS, function(i, item){
           //alert(item.P_NAME);
@@ -198,6 +195,141 @@ function loadUserProfileData() {
     }
   });
 }
+
+/*
+* function to create new case thru AppBase
+*/
+function onSubmitNewRequest() {
+  var server = Config.siteUrl,
+      domain = Config.appBaseDomain,
+      ruleName       = 'root_DCM_createCaseWithOptions',
+      caseTypeId     = 21,   //  TEST
+      casePriorityId = 4;   //  Major
+
+  var vToken  = sessionStorage.getItem("sToken");
+
+  if (vToken) {
+    var url =  server + '/BDS.WebService/DataServiceRest.svc/post/' + domain + '/'+ ruleName +'?t=' + vToken;
+  } else {
+      // setTokenExpires();
+      return;
+  }
+
+  //Params for rule
+  var documentsXml = '';
+  /*          if (uploadedFiles.length > 0) {
+    var urls = [],
+        names = [];
+    uploadedFiles.forEach(function(fileConf) {
+        urls.push(fileConf.file.url);
+        names.push(fileConf.file.originalFileName);
+    });
+    documentsXml += '<DOCUMENTSURLS>' + '<![CDATA[' + urls.join('|||') + ']]>' + '</DOCUMENTSURLS>' +
+                    '<DOCUMENTSNAMES>' + '<![CDATA[' + names.join('|||') + ']]>' + '</DOCUMENTSNAMES>';
+  }
+  */
+  /* Used for Fake Uploads  */
+   documentsXml = '<DOCUMENTSURLS><![CDATA[cms:///1596743955953_202008061559953.docx]]></DOCUMENTSURLS>\
+                   <DOCUMENTSNAMES><![CDATA[Sample Upload Doc.pdf]]></DOCUMENTSNAMES>';
+
+  // MDM Data Section
+  // var requester      = $('#helpdesk_ticket_email').val(),
+  //     languageID     = $('#helpdesk_ticket_custom_field_cf_support_language_195447').val(),
+  //     bookingRef     = $('#helpdesk_ticket_custom_field_cf_uno_uid_195447').val(),
+  //     tripCompleted  = $('#helpdesk_ticket_custom_field_cf_have_you_completed_your_trip_195447').val(),
+  //     reasonID       = $('#helpdesk_ticket_custom_field_cf_contact_reason_195447').val();
+
+//'<CustomData>	<Attributes>					<Object ObjectCode="CASE">									<Item>						<OBJECTCODE><![CDATA[CASE]]></OBJECTCODE>						<ID>-4</ID>						<PARENTID>0</PARENTID>						<PARENTCODE></PARENTCODE>						<SUMMARY><![CDATA[From Portal]]></SUMMARY>						<DESCRIPTION><![CDATA[No Data]]></DESCRIPTION>						<PRIORITY_ID>4</PRIORITY_ID>						<CASESYSTYPE_ID>21</CASESYSTYPE_ID>						<DRAFT>0</DRAFT></Item></Object><Object ObjectCode="CDM_AUTO_LOAN">									<Item>						<CASETYPEID>21</CASETYPEID>						<OBJECTCODE><![CDATA[CDM_AUTO_LOAN]]></OBJECTCODE>						<PARENTID>-4</PARENTID>						<ID>-3</ID>						<PARENTCODE></PARENTCODE>						<MODELID>21</MODELID>						<DOMOBJECTCODE><![CDATA[CDM_AUTO_LOAN]]></DOMOBJECTCODE>						<CDM_AUTO_LOAN_EMPLOYER><![CDATA[INC]]></CDM_AUTO_LOAN_EMPLOYER>						<CDM_AUTO_LOAN_LOAN_AMOUNT>100</CDM_AUTO_LOAN_LOAN_AMOUNT>						<CDM_AUTO_LOAN_ANNUAL_INCOME>2000</CDM_AUTO_LOAN_ANNUAL_INCOME>						<CDM_AUTO_LOAN_CREDIT_SCORE>654</CDM_AUTO_LOAN_CREDIT_SCORE>						<CDM_AUTO_LOAN_CUSTOMER_NAME><![CDATA[Cust]]></CDM_AUTO_LOAN_CUSTOMER_NAME></Item></Object></Attributes></CustomData>';
+
+  var MDMdata = '<Object ObjectCode="CDM_AUTO_LOAN"><Item>\
+  <CASETYPEID>{0}</CASETYPEID>\
+  <OBJECTCODE><![CDATA[CDM_AUTO_LOAN]]></OBJECTCODE><PARENTID>-4</PARENTID><ID>-3</ID><PARENTCODE></PARENTCODE>\
+  <MODELID>{1}</MODELID>\
+  <DOMOBJECTCODE><![CDATA[CDM_AUTO_LOAN]]></DOMOBJECTCODE>\
+  <CDM_AUTO_LOAN_EMPLOYER><![CDATA[INC]]></CDM_AUTO_LOAN_EMPLOYER>\
+  <CDM_AUTO_LOAN_LOAN_AMOUNT>100</CDM_AUTO_LOAN_LOAN_AMOUNT>\
+  <CDM_AUTO_LOAN_ANNUAL_INCOME>2000</CDM_AUTO_LOAN_ANNUAL_INCOME>\
+  <CDM_AUTO_LOAN_CREDIT_SCORE>654</CDM_AUTO_LOAN_CREDIT_SCORE>\
+  <CDM_AUTO_LOAN_CUSTOMER_NAME><![CDATA[Cust]]></CDM_AUTO_LOAN_CUSTOMER_NAME>\
+  </Item></Object>';
+
+  //MDMdata = String.format(MDMdata, caseTypeId, requester, languageID, bookingRef, tripCompleted, reasonID);
+
+  // DCM Section
+  var summary        = $('#iSubject').val(),
+      description    = $('#iDescription').val();
+
+  var XmlDocument = '<CustomData><Attributes>\
+      <Object ObjectCode="CASE"><Item>\
+      <ID>-3</ID><PARENTID>0</PARENTID><ParentCode></ParentCode><OBJECTCODE><![CDATA[CASE]]></OBJECTCODE>\
+      <CASESYSTYPE_ID>{0}</CASESYSTYPE_ID>\
+      <SUMMARY><![CDATA[{1}]]></SUMMARY>\
+      <DESCRIPTION><![CDATA[{2}]]></DESCRIPTION>\
+      <PRIORITY_ID>{3}</PRIORITY_ID>\
+      <CASESYSTYPE_CODE></CASESYSTYPE_CODE><WORKBASKET_ID>0</WORKBASKET_ID><DRAFT>0</DRAFT><ASSIGNORNAME></ASSIGNORNAME>'
+  // Un comment to insert Case Owner   <OWNER_WORKBASKET_ID>2</OWNER_WORKBASKET_ID>'
+  // Insert files to upload
+//  + documentsXml
+  + '</Item></Object>'
+//  + MDMdata
+  + '</Attributes></CustomData>';
+
+  XmlDocument = String.format(XmlDocument, caseTypeId, summary, description, casePriorityId);
+
+  swal({
+    title : 'Processing',
+    text  : 'Briefing submission...',
+    button: false,
+    icon  : 'warning',
+    timer : 1000
+  });
+
+  jQuery.ajax({
+    url   : url,
+    type  : 'POST',
+    data  : {'InputXML': XmlDocument},
+    success: function (response) {
+      if (response && response.ErrorCode === 500) {
+          //setTokenExpires();
+          return;
+      }
+
+      var data = response.DATA[ruleName],
+              respSuccess = '',
+              errorMessage = '';
+
+      if (data) {
+          errorMessage = data.ERRORMESSAGE;
+          if (errorMessage) {
+              swal({
+                  title: 'Warning',
+                  text: errorMessage,
+                  icon: 'error'
+              });
+              return;
+          }
+          respSuccess = data.SUCCESSRESPONSE;
+          if (respSuccess) {
+              swal({
+                  title: 'Information',
+                  text:  respSuccess,
+                  showConfirmButton: true,
+                  icon: 'success'
+              });
+          }
+      }
+  },
+    error  : function (xhr) {
+        swal({
+            title: 'Warning',
+            text:  'Please contact your administrator (' + xhr.status +')',
+            icon:  'error'
+        });
+      }
+  });
+
+}
+
 
 
 // Old Functions

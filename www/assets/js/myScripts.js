@@ -32,7 +32,7 @@ function onSignInAction() {
     }
 
     var url = String.format('{0}Security.WebService/AuthenticationServiceRest.svc/login.post', Config.siteUrl);
-    saveTokenIntoCookie("cokieToTest2020");
+    saveTokenIntoCookie("cokieToTest2022");
     saveLoginIntoCookie("loginName");
 
     $.ajax({
@@ -46,13 +46,6 @@ function onSignInAction() {
             alert("Sucessfull login...");
             saveTokenIntoCookie(token);
             saveLoginIntoCookie(login);
-            //$('#username').text(login);
-            //loadUserCases(122);
-            //init form
-            //$('#login-modal').modal('hide');
-            //            $("#login-modal").modal({ show: false });
-            //alert(token);
-//            window.location.replace("./index.html");
         },
         error: function(xhr, error) {
             alert(error);

@@ -25,15 +25,15 @@ function logOutAction() {
 function onSignInAction() {
     var login    = $('#inputEmail').val(),
         password = $('#inputPassword').val();
+        token    = "1234--" + login + "--5678";
 
     if (!login || !password) {
         alert("Please insert login AND password");
         return;
     }
 
-    var url = String.format('{0}Security.WebService/AuthenticationServiceRest.svc/login.post', Config.siteUrl);
-    saveTokenIntoCookie("cokieToTest2020");
-    saveLoginIntoCookie("loginName");
+    var url = 'http://www.orangepointservices.com/';
+    saveTokenIntoCookie(token);
 
     $.ajax({
         url: url,
@@ -44,15 +44,7 @@ function onSignInAction() {
         },
         success: function(token) {
             alert("Sucessfull login...");
-            saveTokenIntoCookie(token);
-            saveLoginIntoCookie(login);
-            //$('#username').text(login);
-            //loadUserCases(122);
-            //init form
-            //$('#login-modal').modal('hide');
-            //            $("#login-modal").modal({ show: false });
-            //alert(token);
-//            window.location.replace("./index.html");
+            //saveTokenIntoCookie(token);
         },
         error: function(xhr, error) {
             alert(error);
@@ -68,7 +60,7 @@ function onSearchCaseData() {
     if (txtCaseSearchCaseNumber.value) {
 
         var url = String.format('{0}BDS.WebService/DataServiceRest.svc/post/{1}/{2}', Config.siteUrl, Config.appBaseDomain, Config.caseSearchRule),
-            token = getCookieByName(Config.getCookieTokenName());
+            token = getCookieByName("myCookie_token");
 
         if (token) {
             url += '?t=' + token;
@@ -163,16 +155,6 @@ function getCorrectJSON(response) {
     return response;
 }
 
-function saveLoginIntoCookie(login) {
-    var dtNow = new Date(),
-        time = dtNow.getTime() + 3600 * 1000; // plus 1 hour
-
-    dtNow.setTime(time);
-
-    // create cookies
-    document.cookie = Config.getCookieLoginName() + '=' + login + '; expires=' + dtNow.toUTCString() + ';';
-}
-
 function saveTokenIntoCookie(token) {
     var dtNow = new Date(),
         time = dtNow.getTime() + 3600 * 1000; // plus 1 hour
@@ -180,12 +162,12 @@ function saveTokenIntoCookie(token) {
     dtNow.setTime(time);
 
     // create cookies
-    document.cookie = Config.getCookieTokenName() + '=' + token + '; expires=' + dtNow.toUTCString() + ';';
+    document.cookie = "myCookie_token" + '=' + token + '; expires=' + dtNow.toUTCString() + ';';
 }
 
 function removeTokenFromCookie() {
-    document.cookie = Config.getCookieTokenName() + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-    document.cookie = Config.getCookieLoginName() + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    document.cookie = "myCookie_token" + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    document.cookie = "myCookie_token" + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 }
 
 function getCookieByName(cookieName) {
@@ -205,7 +187,7 @@ function getCookieByName(cookieName) {
 
 function loadUserCases(extPtyID) {
     var url = String.format('{0}BDS.WebService/DataServiceRest.svc/post/{1}/{2}', Config.siteUrl, Config.appBaseDomain, Config.caseSearchRule),
-        token = getCookieByName(Config.getCookieTokenName());
+        token = getCookieByName("myCookie_token");
     if (!token) {
         return;
     }
@@ -295,7 +277,7 @@ function loadUserCases(extPtyID) {
                     function(isConfirm) {
                         if (isConfirm) {
                             var url = String.format('{0}Ecx.Web/en-US/do/root_UTIL_BasePage?Case_Id={1}&d={2}&{3}', Config.siteUrl, caseId, Config.appBaseDomain, Config.getCaseDetailPageParams()),
-                                token = getCookieByName(Config.getCookieTokenName());
+                                token = getCookieByName("myCookie_token");
 
                             if (token) {
                                 url += '&t=' + token;
@@ -320,20 +302,14 @@ function loadUserCases(extPtyID) {
 
 }
 
-function refreshGrid() {
-    var epID = $('#txtExtPartyID').val();
-    console.log('Updating Cases Grid for ID: ' + epID);
-    loadUserCases(epID);
-};
-
 //Load User Data
 function loadUserInformation() {
-    var login = getCookieByName(Config.getCookieLoginName());
+    var login = getCookieByName("myCookie_token");
 
     if (!login) return;
 
     var url = String.format('{0}Security.WebService/AdministrationServiceRest.svc/users/{1}/login/l?login={2}', Config.siteUrl, Config.appBaseTokenSystemDomain, login);
-    var token = getCookieByName(Config.getCookieTokenName());
+    var token = getCookieByName("myCookie_token");
 
     if (token) {
         url += '&t=' + token;
@@ -379,8 +355,8 @@ function loadUserInformation() {
 //Load User Profile Data
 function loadUserProfileData() {
     var url = String.format('{0}BDS.WebService/DataServiceRest.svc/post/{1}/ROOT_CUST_PRTL_GETUSERINFO', Config.siteUrl, Config.appBaseDomain);
-    var vLogin    = getCookieByName(Config.getCookieLoginName());
-    var vToken    = getCookieByName(Config.getCookieTokenName());
+    var vLogin    = getCookieByName("myCookie_token");
+    var vToken    = getCookieByName("myCookie_token");
     $("#txtUsername").val(vLogin);
     $("#username").text(vLogin);
     console.log("vLogin : " + vLogin);
